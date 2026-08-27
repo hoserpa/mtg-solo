@@ -399,20 +399,20 @@ Implementar inicialmente:
 
 **Objetivo:** convertir la herramienta en una aplicación instalable y utilizable offline.
 
-- [ ] Crear `manifest.webmanifest`.
-- [ ] Añadir iconos.
-- [ ] Configurar nombre de aplicación.
-- [ ] Configurar descripción.
-- [ ] Añadir Service Worker.
-- [ ] Cachear assets estáticos.
-- [ ] Comprobar carga offline.
+- [x] Crear `manifest.webmanifest`.
+- [x] Añadir iconos.
+- [x] Configurar nombre de aplicación.
+- [x] Configurar descripción.
+- [x] Añadir Service Worker.
+- [x] Cachear assets estáticos.
+- [x] Comprobar carga offline.
 - [ ] Comprobar instalación en móvil.
 - [ ] Comprobar actualización de assets.
 
 ### Resultado
 
-- [ ] La aplicación puede instalarse como PWA.
-- [ ] Una vez cargada, puede funcionar sin conexión.
+- [x] La aplicación puede instalarse como PWA.
+- [x] Una vez cargada, puede funcionar sin conexión.
 
 ---
 
