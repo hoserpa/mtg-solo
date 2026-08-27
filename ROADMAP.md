@@ -366,32 +366,32 @@ Implementar inicialmente:
 
 ### Configuración
 
-- [ ] Implementar `useLocalStorage`.
-- [ ] Guardar última dificultad.
-- [ ] Guardar configuración personalizada.
-- [ ] Guardar eventos habilitados.
-- [ ] Guardar preferencias visuales.
+- [x] Implementar `createSettingsStore(storage)`.
+- [x] Guardar última dificultad.
+- [x] Guardar configuración personalizada.
+- [x] Guardar eventos habilitados.
+- [x] Guardar preferencias visuales.
 
 ### Estadísticas
 
-- [ ] Guardar partidas jugadas.
-- [ ] Guardar victorias.
-- [ ] Guardar derrotas.
-- [ ] Guardar empates.
-- [ ] Guardar turnos totales.
-- [ ] Guardar eventos totales.
+- [x] Guardar partidas jugadas.
+- [x] Guardar victorias.
+- [x] Guardar derrotas.
+- [x] Guardar empates.
+- [x] Guardar turnos totales.
+- [x] Guardar eventos totales.
 
 ### Robustez
 
-- [ ] Añadir versión a los datos persistidos.
-- [ ] Validar datos al leer.
-- [ ] Gestionar JSON corrupto.
-- [ ] Gestionar cambios de versión.
-- [ ] No romper la aplicación si `localStorage` no está disponible.
+- [x] Añadir versión a los datos persistidos.
+- [x] Validar datos al leer.
+- [x] Gestionar JSON corrupto.
+- [x] Gestionar cambios de versión.
+- [x] No romper la aplicación si `localStorage` no está disponible.
 
 ### Resultado
 
-- [ ] La configuración sobrevive al cerrar y abrir la aplicación.
+- [x] La configuración sobrevive al cerrar y abrir la aplicación.
 
 ---
 

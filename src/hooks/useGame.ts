@@ -1,4 +1,4 @@
-import { useState, useCallback, useRef } from "react";
+import { useEffect, useRef, useState, useCallback } from "react";
 import type { AppState, Screen } from "@/app/appTypes";
 import type { GameConfig, GameAction } from "@/features/game/gameTypes";
 import { createGameState, gameReducer } from "@/features/game/gameReducer";
@@ -11,26 +11,51 @@ import { filterEventsForConfig } from "@/features/events/eventSelector";
 import { INITIAL_EVENTS } from "@/data/events";
 import { validateGameConfig } from "@/lib/validation";
 import { createRandomGenerator, type RandomGenerator } from "@/lib/random";
-
-const initialConfig = getDefaultConfig("easy");
-
-const initialState: AppState = {
-  screen: "home",
-  config: initialConfig,
-  game: null,
-};
+import { getBrowserStorage } from "@/lib/browserStorage";
+import {
+  createSettingsStore,
+  type SettingsStore,
+} from "@/features/settings/settingsStore";
+import { createDefaultSettings } from "@/features/settings/settingsValidation";
+import type {
+  Statistics,
+  StoredSettings,
+} from "@/features/settings/settingsTypes";
 
 export function useGame() {
-  const [state, setState] = useState<AppState>(initialState);
+  const storeRef = useRef<SettingsStore | null>(null);
+  const settingsRef = useRef<StoredSettings | null>(null);
   const rngRef = useRef<RandomGenerator>(createRandomGenerator());
+
+  const [state, setState] = useState<AppState>(() => {
+    const store = createSettingsStore(getBrowserStorage());
+    storeRef.current = store;
+    const stored = store.load();
+    settingsRef.current = stored;
+    return {
+      screen: "home",
+      config: stored?.config ?? getDefaultConfig("easy"),
+      game: null,
+    };
+  });
+
+  const persistSettings = useCallback((next: StoredSettings) => {
+    settingsRef.current = next;
+    storeRef.current?.save(next);
+  }, []);
 
   const navigate = useCallback((screen: Screen) => {
     setState((prev) => ({ ...prev, screen }));
   }, []);
 
-  const setConfig = useCallback((config: GameConfig) => {
-    setState((prev) => ({ ...prev, config }));
-  }, []);
+  const setConfig = useCallback(
+    (config: GameConfig) => {
+      setState((prev) => ({ ...prev, config }));
+      const current = settingsRef.current ?? createDefaultSettings(config);
+      persistSettings({ ...current, config });
+    },
+    [persistSettings],
+  );
 
   const startGame = useCallback(() => {
     const validation = validateGameConfig(state.config);
@@ -125,6 +150,32 @@ export function useGame() {
     dispatch({ type: "RESET_GAME" });
     setState((prev) => ({ ...prev, screen: "home", game: null }));
   }, [dispatch]);
+
+  const recordedGameIdRef = useRef<string | null>(null);
+
+  useEffect(() => {
+    const game = state.game;
+    if (!game) return;
+
+    const isFinished =
+      game.status === "won" || game.status === "lost" || game.status === "draw";
+    if (!isFinished) return;
+
+    if (recordedGameIdRef.current === game.startedAt) return;
+    recordedGameIdRef.current = game.startedAt;
+
+    const current = settingsRef.current ?? createDefaultSettings(state.config);
+    const stats = current.stats;
+    const nextStats: Statistics = {
+      gamesPlayed: stats.gamesPlayed + 1,
+      wins: stats.wins + (game.status === "won" ? 1 : 0),
+      losses: stats.losses + (game.status === "lost" ? 1 : 0),
+      draws: stats.draws + (game.status === "draw" ? 1 : 0),
+      totalTurns: stats.totalTurns + game.turn,
+      totalEvents: stats.totalEvents + game.eventHistory.length,
+    };
+    persistSettings({ ...current, stats: nextStats });
+  }, [state.game, state.config, persistSettings]);
 
   return {
     state,
