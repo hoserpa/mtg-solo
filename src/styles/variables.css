@@ -1,0 +1,36 @@
+@import "./mtg-playmat-theme.css";
+
+:root {
+  /* Mapeo retrocompatible de variables antiguas a variables del tema MTG */
+  --color-bg: var(--mtg-felt-800);
+  --color-surface: var(--mtg-felt-700);
+  --color-parchment: var(--mtg-parchment-100);
+  --color-parchment-dark: var(--mtg-parchment-300);
+  --color-gold: var(--mtg-gold-500);
+  --color-gold-dim: var(--mtg-stitch);
+  --color-red: var(--mtg-red);
+  --color-red-dark: #8b1519;
+  --color-green: var(--mtg-green);
+  --color-blue: var(--mtg-blue);
+  --color-text: var(--mtg-parchment-100);
+  --color-text-muted: var(--mtg-parchment-200);
+  --color-border: var(--mtg-felt-600);
+  --color-border-gold: var(--mtg-gold-500);
+
+  --font-display: var(--mtg-font-display);
+  --font-body: var(--mtg-font-body);
+
+  --space-xs: var(--mtg-space-1);
+  --space-sm: var(--mtg-space-2);
+  --space-md: var(--mtg-space-3);
+  --space-lg: var(--mtg-space-4);
+  --space-xl: var(--mtg-space-5);
+
+  --radius-sm: var(--mtg-radius-sm);
+  --radius-md: 10px;
+  --radius-lg: var(--mtg-radius-card);
+
+  --breakpoint-sm: 480px;
+  --breakpoint-md: 768px;
+  --breakpoint-lg: 1024px;
+}

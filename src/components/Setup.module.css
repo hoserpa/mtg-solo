@@ -1,0 +1,386 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+  padding: var(--mtg-space-4);
+  gap: var(--mtg-space-4);
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: var(--mtg-space-3);
+}
+
+.backButton {
+  font-size: 1.5rem;
+  color: var(--mtg-gold-400);
+  padding: var(--mtg-space-1);
+  border: 1px solid transparent;
+  border-radius: var(--mtg-radius-sm);
+  transition:
+    box-shadow 0.15s ease,
+    border-color 0.15s ease;
+}
+
+.backButton:hover {
+  border-color: var(--mtg-gold-500);
+  box-shadow: var(--mtg-glow-gold);
+}
+
+.backButton:focus-visible {
+  outline: 2px solid var(--mtg-gold-300);
+  outline-offset: 2px;
+}
+
+.title {
+  font-family: var(--mtg-font-display);
+  font-size: 1.4rem;
+  letter-spacing: 0.04em;
+  color: var(--mtg-gold-300);
+  text-transform: uppercase;
+}
+
+.difficulties {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mtg-space-3);
+}
+
+.sectionEyebrow {
+  font-family: var(--mtg-font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--mtg-gold-500);
+}
+
+.difficultyCard {
+  position: relative;
+  font-family: var(--mtg-font-body);
+  background: var(--mtg-felt-900);
+  color: var(--mtg-parchment-100);
+  border-radius: var(--mtg-radius-card);
+  border: 2px solid var(--mtg-felt-600);
+  box-shadow: var(--mtg-shadow-inset);
+  padding: var(--mtg-space-4);
+  cursor: pointer;
+  transition:
+    box-shadow 0.15s ease,
+    transform 0.15s ease,
+    border-color 0.15s ease,
+    background 0.15s ease;
+  text-align: left;
+  display: flex;
+  align-items: center;
+  gap: var(--mtg-space-3);
+}
+
+.difficultyBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mtg-space-1);
+}
+
+.manaBadge {
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4rem;
+  color: var(--mtg-ink);
+  border: 2px solid rgba(0, 0, 0, 0.35);
+  box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.18);
+}
+
+.manaBadge svg {
+  width: 22px;
+  height: 22px;
+}
+
+.manaBadge--white {
+  background: var(--mtg-white);
+}
+
+.manaBadge--green {
+  background: var(--mtg-green);
+  color: var(--mtg-parchment-100);
+}
+
+.manaBadge--black {
+  background: var(--mtg-black);
+  color: var(--mtg-parchment-100);
+}
+
+.difficultyCard:hover {
+  border-color: var(--mtg-gold-500);
+  transform: translateY(-1px);
+}
+
+.difficultyCard:focus-visible {
+  outline: 2px solid var(--mtg-gold-300);
+  outline-offset: 2px;
+}
+
+.difficultyCard.selected {
+  background: var(--mtg-felt-700);
+  border: var(--mtg-border-width) solid var(--mtg-gold-300);
+  box-shadow: var(--mtg-glow-gold), var(--mtg-shadow-inset);
+  transform: translateY(-1px);
+}
+
+.difficultyCard.selected::after {
+  content: "✓";
+  position: absolute;
+  top: var(--mtg-space-2);
+  right: var(--mtg-space-3);
+  font-family: var(--mtg-font-display);
+  font-size: 1.1rem;
+  color: var(--mtg-gold-300);
+}
+
+.difficultyName {
+  font-family: var(--mtg-font-display);
+  font-size: 1.2rem;
+  letter-spacing: 0.04em;
+  color: var(--mtg-parchment-200);
+  transition: color 0.15s ease;
+}
+
+.difficultyCard.selected .difficultyName {
+  color: var(--mtg-gold-300);
+}
+
+.difficultyDesc {
+  color: var(--mtg-parchment-200);
+  font-size: 0.85rem;
+  line-height: 1.4;
+}
+
+.startButton {
+  font-family: var(--mtg-font-display);
+  font-size: 1rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--mtg-ink);
+  background: linear-gradient(180deg, var(--mtg-gold-400), var(--mtg-stitch));
+  border: 1px solid var(--mtg-gold-300);
+  border-radius: var(--mtg-radius-sm);
+  padding: var(--mtg-space-3) var(--mtg-space-5);
+  cursor: pointer;
+  transition:
+    box-shadow 0.15s ease,
+    transform 0.15s ease;
+  margin-top: auto;
+  margin-bottom: var(--mtg-space-4);
+}
+
+.startButton:hover:not(:disabled) {
+  box-shadow: var(--mtg-glow-gold);
+  transform: translateY(-1px);
+}
+
+.startButton:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.startButton:focus-visible {
+  outline: 2px solid var(--mtg-gold-300);
+  outline-offset: 2px;
+}
+
+.configSection {
+  background: var(--mtg-felt-900);
+  color: var(--mtg-parchment-100);
+  border-radius: var(--mtg-radius-sm);
+  border: 1px solid var(--mtg-felt-600);
+  box-shadow: var(--mtg-shadow-inset);
+  padding: var(--mtg-space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--mtg-space-3);
+}
+
+.configRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--mtg-space-3);
+}
+
+.configLabel {
+  font-family: var(--mtg-font-body);
+  font-size: 0.9rem;
+  color: var(--mtg-parchment-200);
+}
+
+.configInput {
+  font-family: var(--mtg-font-body);
+  font-size: 1rem;
+  color: var(--mtg-ink);
+  background: var(--mtg-parchment-100);
+  border: 1px solid var(--mtg-parchment-300);
+  border-radius: var(--mtg-radius-sm);
+  width: 80px;
+  padding: var(--mtg-space-2) var(--mtg-space-3);
+  font-weight: 700;
+  text-align: center;
+}
+
+.configInput:focus-visible {
+  outline: none;
+  border-color: var(--mtg-gold-500);
+  box-shadow: var(--mtg-glow-gold);
+}
+
+.configInput::-webkit-inner-spin-button,
+.configInput::-webkit-outer-spin-button {
+  opacity: 1;
+}
+
+.stepper {
+  display: flex;
+  align-items: center;
+  gap: var(--mtg-space-1);
+}
+
+.stepBtn {
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  font-size: 1.1rem;
+  line-height: 1;
+  color: var(--mtg-parchment-100);
+  background: linear-gradient(180deg, var(--mtg-felt-600), var(--mtg-felt-800));
+  border: 1px solid var(--mtg-gold-500);
+  border-radius: var(--mtg-radius-sm);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition:
+    box-shadow 0.15s ease,
+    transform 0.15s ease,
+    background 0.15s ease;
+}
+
+.stepBtn:hover {
+  box-shadow: var(--mtg-glow-gold);
+  background: linear-gradient(180deg, var(--mtg-felt-600), var(--mtg-felt-700));
+}
+
+.stepBtn:active {
+  transform: translateY(1px);
+}
+
+.stepBtn:focus-visible {
+  outline: 2px solid var(--mtg-gold-300);
+  outline-offset: 2px;
+}
+
+.hint {
+  font-size: 0.75rem;
+  color: var(--mtg-parchment-200);
+  font-style: italic;
+}
+
+.advanced {
+  border: 1px solid var(--mtg-felt-600);
+  border-radius: var(--mtg-radius-sm);
+  background: var(--mtg-felt-900);
+}
+
+.advancedSummary {
+  cursor: pointer;
+  font-family: var(--mtg-font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--mtg-gold-400);
+  padding: var(--mtg-space-3) var(--mtg-space-4);
+  list-style: none;
+  user-select: none;
+}
+
+.advancedSummary::-webkit-details-marker {
+  display: none;
+}
+
+.advancedSummary::before {
+  content: "▸ ";
+  color: var(--mtg-gold-500);
+}
+
+.advanced[open] .advancedSummary::before {
+  content: "▾ ";
+}
+
+.advanced .configSection {
+  border: none;
+  border-top: 1px solid var(--mtg-felt-600);
+  border-radius: 0;
+}
+
+.checkbox {
+  width: 20px;
+  height: 20px;
+  accent-color: var(--mtg-gold-500);
+  cursor: pointer;
+}
+
+.freqRow {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mtg-space-2);
+}
+
+.range {
+  width: 100%;
+  accent-color: var(--mtg-gold-500);
+  cursor: pointer;
+}
+
+.summary {
+  background: var(--mtg-felt-800);
+  border: 1px solid var(--mtg-gold-500);
+  border-radius: var(--mtg-radius-card);
+  padding: var(--mtg-space-3) var(--mtg-space-4);
+  display: flex;
+  flex-direction: column;
+  gap: var(--mtg-space-1);
+  font-size: 0.85rem;
+}
+
+.summaryTitle {
+  font-family: var(--mtg-font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--mtg-gold-500);
+  margin-bottom: var(--mtg-space-1);
+}
+
+.summaryRow {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--mtg-space-3);
+  color: var(--mtg-parchment-200);
+}
+
+.summaryRow span:last-child {
+  color: var(--mtg-gold-300);
+  font-weight: 600;
+}
+
+@media (min-width: 768px) {
+  .container {
+    max-width: 480px;
+    margin: 0 auto;
+  }
+}

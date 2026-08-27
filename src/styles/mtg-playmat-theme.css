@@ -1,0 +1,350 @@
+/* ==========================================================================
+   MTG PLAYMAT THEME
+   Sistema de diseño inspirado en un tapete de juego de Magic: The Gathering.
+   Fieltro verde oscuro, costuras doradas, zonas tipo carta en pergamino,
+   y acentos de los cinco colores de maná para estados semánticos.
+
+   Uso: importar este archivo y aplicar las clases de componentes,
+   o simplemente consumir las variables --mtg-* en tu propio CSS.
+   ========================================================================== */
+
+:root {
+  /* -- Paleta base: el fieltro del tapete -- */
+  --mtg-felt-900: #10241c; /* sombra profunda / fondo de la mesa */
+  --mtg-felt-800: #1b3a2f; /* fieltro principal */
+  --mtg-felt-700: #274d3d; /* fieltro elevado (paneles) */
+  --mtg-felt-600: #35634e; /* borde de fieltro / hover sutil */
+
+  /* -- Costuras y metal: el trim dorado del borde -- */
+  --mtg-gold-500: #c9a227;
+  --mtg-gold-400: #e0bc4a;
+  --mtg-gold-300: #f0d585;
+  --mtg-stitch: #8a6c1a;
+
+  /* -- Pergamino: zonas de carta / superficies de contenido -- */
+  --mtg-parchment-100: #f3e9d2;
+  --mtg-parchment-200: #ede0c8;
+  --mtg-parchment-300: #ddc9a3;
+  --mtg-ink: #1c1712;
+  --mtg-ink-soft: #4a3f30;
+
+  /* -- Colores de maná: para estados semánticos, tags, badges -- */
+  --mtg-white: #f8f6e3; /* W - orden, éxito neutro */
+  --mtg-blue: #4a7ba6; /* U - información */
+  --mtg-black: #2e2a2e; /* B - peligro / destructivo */
+  --mtg-red: #a13d2c; /* R - error / alerta */
+  --mtg-green: #4c7a3f; /* G - éxito / confirmación */
+  --mtg-gold-mana: var(--mtg-gold-500); /* multicolor / destacado */
+
+  /* -- Tipografía -- */
+  --mtg-font-display: "Cinzel", "Trajan Pro", Georgia, serif;
+  --mtg-font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  --mtg-font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
+
+  /* -- Espaciado y forma -- */
+  --mtg-radius-card: 14px;
+  --mtg-radius-sm: 6px;
+  --mtg-border-width: 3px;
+  --mtg-space-1: 4px;
+  --mtg-space-2: 8px;
+  --mtg-space-3: 16px;
+  --mtg-space-4: 24px;
+  --mtg-space-5: 40px;
+
+  /* -- Sombras: profundidad de mesa de juego -- */
+  --mtg-shadow-card: 0 6px 16px rgba(0, 0, 0, 0.45);
+  --mtg-shadow-inset: inset 0 0 40px rgba(0, 0, 0, 0.35);
+  --mtg-glow-gold:
+    0 0 0 1px var(--mtg-gold-500), 0 0 12px rgba(201, 162, 39, 0.35);
+}
+
+/* ==========================================================================
+   BASE / FONDO DE MESA
+   ========================================================================== */
+
+body.mtg-theme {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--mtg-font-body);
+  color: var(--mtg-parchment-100);
+  background-color: var(--mtg-felt-800);
+  /* Textura de fieltro: veteado sutil + viñeta de mesa */
+  background-image:
+    radial-gradient(
+      ellipse at center,
+      rgba(255, 255, 255, 0.04) 0%,
+      rgba(0, 0, 0, 0.25) 75%
+    ),
+    repeating-linear-gradient(
+      45deg,
+      rgba(255, 255, 255, 0.015) 0px,
+      rgba(255, 255, 255, 0.015) 2px,
+      transparent 2px,
+      transparent 6px
+    );
+  background-attachment: fixed;
+}
+
+.mtg-theme ::selection {
+  background: var(--mtg-gold-500);
+  color: var(--mtg-ink);
+}
+
+.mtg-theme a {
+  color: var(--mtg-gold-400);
+  text-decoration: none;
+}
+.mtg-theme a:hover {
+  color: var(--mtg-gold-300);
+  text-decoration: underline;
+}
+
+/* ==========================================================================
+   TIPOGRAFÍA
+   ========================================================================== */
+
+.mtg-h1,
+.mtg-h2,
+.mtg-h3 {
+  font-family: var(--mtg-font-display);
+  letter-spacing: 0.04em;
+  color: var(--mtg-gold-300);
+  text-shadow: 0 2px 3px rgba(0, 0, 0, 0.6);
+  margin: 0 0 var(--mtg-space-3);
+}
+.mtg-h1 {
+  font-size: 2rem;
+  text-transform: uppercase;
+}
+.mtg-h2 {
+  font-size: 1.4rem;
+}
+.mtg-h3 {
+  font-size: 1.1rem;
+  letter-spacing: 0.02em;
+}
+
+.mtg-eyebrow {
+  font-family: var(--mtg-font-mono);
+  font-size: 0.7rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  color: var(--mtg-gold-500);
+}
+
+.mtg-flavor-text {
+  font-style: italic;
+  color: var(--mtg-ink-soft);
+}
+
+/* ==========================================================================
+   CARTAS / PANELES — la "zona de carta" con marco de costura
+   ========================================================================== */
+
+.mtg-card {
+  position: relative;
+  background: var(--mtg-parchment-200);
+  color: var(--mtg-ink);
+  border-radius: var(--mtg-radius-card);
+  border: var(--mtg-border-width) solid var(--mtg-gold-500);
+  box-shadow: var(--mtg-shadow-card);
+  padding: var(--mtg-space-4);
+}
+
+/* Línea de costura interior, como el borde cosido de un tapete */
+.mtg-card::before {
+  content: "";
+  position: absolute;
+  inset: 6px;
+  border: 1px dashed rgba(28, 23, 18, 0.25);
+  border-radius: calc(var(--mtg-radius-card) - 6px);
+  pointer-events: none;
+}
+
+.mtg-card--felt {
+  background: var(--mtg-felt-700);
+  color: var(--mtg-parchment-100);
+  box-shadow: var(--mtg-shadow-card), var(--mtg-shadow-inset);
+}
+.mtg-card--felt::before {
+  border-color: rgba(224, 188, 74, 0.15);
+}
+
+.mtg-card__title {
+  font-family: var(--mtg-font-display);
+  font-size: 1rem;
+  color: var(--mtg-ink);
+  border-bottom: 1px solid var(--mtg-gold-500);
+  padding-bottom: var(--mtg-space-2);
+  margin-bottom: var(--mtg-space-3);
+}
+
+/* ==========================================================================
+   BOTONES — como contadores de maná tallados
+   ========================================================================== */
+
+.mtg-btn {
+  font-family: var(--mtg-font-display);
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--mtg-parchment-100);
+  background: linear-gradient(180deg, var(--mtg-felt-600), var(--mtg-felt-800));
+  border: 1px solid var(--mtg-gold-500);
+  border-radius: var(--mtg-radius-sm);
+  padding: var(--mtg-space-2) var(--mtg-space-4);
+  cursor: pointer;
+  transition:
+    box-shadow 0.15s ease,
+    transform 0.15s ease,
+    background 0.15s ease;
+}
+.mtg-btn:hover {
+  box-shadow: var(--mtg-glow-gold);
+  transform: translateY(-1px);
+}
+.mtg-btn:active {
+  transform: translateY(0);
+}
+.mtg-btn:focus-visible {
+  outline: 2px solid var(--mtg-gold-300);
+  outline-offset: 2px;
+}
+.mtg-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+  transform: none;
+}
+
+.mtg-btn--primary {
+  background: linear-gradient(180deg, var(--mtg-gold-400), var(--mtg-stitch));
+  color: var(--mtg-ink);
+  border-color: var(--mtg-gold-300);
+}
+
+.mtg-btn--danger {
+  background: linear-gradient(180deg, #b1503c, var(--mtg-red));
+  border-color: #e0836a;
+}
+
+/* ==========================================================================
+   INSIGNIAS DE MANÁ — estados semánticos (info, éxito, error, alerta)
+   ========================================================================== */
+
+.mtg-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--mtg-space-1);
+  font-family: var(--mtg-font-mono);
+  font-size: 0.72rem;
+  padding: 2px 10px;
+  border-radius: 999px;
+  border: 1px solid rgba(0, 0, 0, 0.25);
+  color: var(--mtg-ink);
+}
+.mtg-badge--white {
+  background: var(--mtg-white);
+}
+.mtg-badge--blue {
+  background: var(--mtg-blue);
+  color: var(--mtg-parchment-100);
+}
+.mtg-badge--black {
+  background: var(--mtg-black);
+  color: var(--mtg-parchment-100);
+  border-color: rgba(255, 255, 255, 0.15);
+}
+.mtg-badge--red {
+  background: var(--mtg-red);
+  color: var(--mtg-parchment-100);
+}
+.mtg-badge--green {
+  background: var(--mtg-green);
+  color: var(--mtg-parchment-100);
+}
+.mtg-badge--gold {
+  background: var(--mtg-gold-mana);
+}
+
+/* ==========================================================================
+   CAMPOS DE ENTRADA
+   ========================================================================== */
+
+.mtg-input {
+  font-family: var(--mtg-font-body);
+  font-size: 0.95rem;
+  color: var(--mtg-ink);
+  background: var(--mtg-parchment-100);
+  border: 1px solid var(--mtg-parchment-300);
+  border-radius: var(--mtg-radius-sm);
+  padding: var(--mtg-space-2) var(--mtg-space-3);
+}
+.mtg-input:focus-visible {
+  outline: none;
+  border-color: var(--mtg-gold-500);
+  box-shadow: var(--mtg-glow-gold);
+}
+.mtg-input::placeholder {
+  color: var(--mtg-ink-soft);
+  opacity: 0.6;
+}
+
+/* ==========================================================================
+   BLOQUES DE CÓDIGO — pergamino oscuro con letra monoespaciada
+   ========================================================================== */
+
+.mtg-code {
+  display: block;
+  font-family: var(--mtg-font-mono);
+  font-size: 0.85rem;
+  line-height: 1.5;
+  color: var(--mtg-parchment-100);
+  background: var(--mtg-felt-900);
+  border: 1px solid var(--mtg-stitch);
+  border-radius: var(--mtg-radius-sm);
+  padding: var(--mtg-space-3);
+  overflow-x: auto;
+}
+.mtg-code .mtg-code__comment {
+  color: var(--mtg-gold-500);
+  opacity: 0.8;
+}
+
+/* ==========================================================================
+   DIVISORES — costura de tapete
+   ========================================================================== */
+
+.mtg-divider {
+  border: none;
+  border-top: 1px dashed var(--mtg-gold-500);
+  opacity: 0.5;
+  margin: var(--mtg-space-4) 0;
+}
+
+/* ==========================================================================
+   BARRA DE DESPLAZAMIENTO
+   ========================================================================== */
+
+.mtg-theme ::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+.mtg-theme ::-webkit-scrollbar-track {
+  background: var(--mtg-felt-900);
+}
+.mtg-theme ::-webkit-scrollbar-thumb {
+  background: var(--mtg-gold-500);
+  border-radius: 6px;
+  border: 2px solid var(--mtg-felt-900);
+}
+
+/* ==========================================================================
+   UTILIDADES DE ACCESIBILIDAD
+   ========================================================================== */
+
+@media (prefers-reduced-motion: reduce) {
+  .mtg-btn {
+    transition: none;
+  }
+}
