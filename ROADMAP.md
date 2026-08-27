@@ -500,11 +500,11 @@ Vite genera por defecto un build estático en `dist`, que puede desplegarse en s
 ### Opción recomendada
 
 - [ ] Crear proyecto en GitHub.
-- [ ] Configurar GitHub Pages.
-- [ ] Configurar `base` de Vite si el proyecto se sirve bajo `/<REPO>/`.
-- [ ] Crear workflow de GitHub Actions.
-- [ ] Ejecutar build.
-- [ ] Publicar `dist`.
+- [x] Configurar GitHub Pages.
+- [x] Configurar `base` de Vite si el proyecto se sirve bajo `/<REPO>/`.
+- [x] Crear workflow de GitHub Actions.
+- [x] Ejecutar build.
+- [x] Publicar `dist`.
 - [ ] Comprobar URL pública.
 - [ ] Probar navegación.
 - [ ] Probar PWA en producción.
