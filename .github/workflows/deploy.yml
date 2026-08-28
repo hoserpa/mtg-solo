@@ -38,6 +38,11 @@ jobs:
           npm run test
           npm run build
 
+      - name: Ejecutar tests E2E
+        run: |
+          npx playwright install chromium
+          npm run test:e2e
+
       - name: Configurar Pages
         uses: actions/configure-pages@v6
 

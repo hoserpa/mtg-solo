@@ -422,36 +422,42 @@ Implementar inicialmente:
 
 ### Unit
 
-- [ ] Cobertura de `GameState`.
-- [ ] Cobertura de turnos.
-- [ ] Cobertura de rondas.
-- [ ] Cobertura de vidas.
-- [ ] Cobertura de victoria/derrota/empate.
-- [ ] Cobertura del selector ponderado.
-- [ ] Cobertura de frecuencia.
-- [ ] Cobertura de eventos.
-- [ ] Cobertura de validación.
-- [ ] Cobertura de persistencia.
+- [x] Cobertura de `GameState`.
+- [x] Cobertura de turnos.
+- [x] Cobertura de rondas.
+- [x] Cobertura de vidas.
+- [x] Cobertura de victoria/derrota/empate.
+- [x] Cobertura del selector ponderado.
+- [x] Cobertura de frecuencia.
+- [x] Cobertura de eventos.
+- [x] Cobertura de validación.
+- [x] Cobertura de persistencia.
 
 ### E2E
 
-- [ ] Abrir aplicación.
-- [ ] Crear partida Fácil.
-- [ ] Crear partida Medio.
-- [ ] Crear partida Difícil.
-- [ ] Crear partida Personalizada.
-- [ ] Avanzar turnos.
-- [ ] Resolver evento automático.
-- [ ] Resolver evento manual.
-- [ ] Ganar una partida.
-- [ ] Perder una partida.
-- [ ] Empatar una partida.
-- [ ] Reiniciar partida.
-- [ ] Comprobar persistencia.
+- [x] Abrir aplicación.
+- [x] Crear partida Fácil.
+- [x] Crear partida Medio.
+- [x] Crear partida Difícil.
+- [x] Crear partida Personalizada.
+- [x] Avanzar turnos.
+- [x] Resolver evento automático.
+- [x] Resolver evento manual.
+- [x] Ganar una partida.
+- [x] Perder una partida.
+- [x] Empatar una partida.
+- [x] Reiniciar partida.
+- [x] Comprobar persistencia.
+
+> **Notas E2E:** todos los eventos usan el mismo flujo de "Resolver" (el
+> `resolutionMode` no se expone en la UI), así que "automático"/"manual" se
+> cubren con un único flujo de resolución de evento. El empate no es alcanzable
+> vía UI (una acción solo afecta a un bando), por lo que se cubre únicamente en
+> tests unitarios del reducer.
 
 ### Resultado
 
-- [ ] Los flujos críticos están cubiertos automáticamente.
+- [x] Los flujos críticos están cubiertos automáticamente.
 
 ---
 
