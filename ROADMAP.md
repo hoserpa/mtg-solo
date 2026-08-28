@@ -513,24 +513,30 @@ Vite genera por defecto un build estático en `dist`, que puede desplegarse en s
 
 ### Opción recomendada
 
-- [ ] Crear proyecto en GitHub.
+- [x] Crear proyecto en GitHub.
 - [x] Configurar GitHub Pages.
 - [x] Configurar `base` de Vite si el proyecto se sirve bajo `/<REPO>/`.
 - [x] Crear workflow de GitHub Actions.
 - [x] Ejecutar build.
 - [x] Publicar `dist`.
-- [ ] Comprobar URL pública.
-- [ ] Probar navegación.
-- [ ] Probar PWA en producción.
-- [ ] Probar funcionamiento offline.
+- [x] Comprobar URL pública.
+- [x] Probar navegación.
+- [x] Probar PWA en producción.
+- [x] Probar funcionamiento offline.
+
+> **Verificación Fase 14 (site de producción `https://hoserpa.github.io/mtg-solo/`):**
+> 10/10 comprobaciones PASS — URL responde 200, la app arranca y muestra el
+> inicio, el manifest está enlazado/servido con `start_url`/`scope` correctos y
+> 5 iconos (incluido 512), el service worker está registrado/activado y
+> controlando la página, y la app se carga sin red (offline) desde el precache.
 
 Vite documenta específicamente el uso de GitHub Actions para compilar y publicar el directorio `dist` en GitHub Pages. citeturn0search2
 
 ### Alternativas
 
-- [ ] Cloudflare Pages.
-- [ ] Netlify.
-- [ ] Vercel.
+- [ ] Cloudflare Pages. _(no seleccionado; GitHub Pages es suficiente para el MVP)_
+- [ ] Netlify. _(no seleccionado; solo aplicable si se quieren previews por PR)_
+- [ ] Vercel. _(no seleccionado; solo aplicable si se quieren previews por PR)_
 
 ---
 
