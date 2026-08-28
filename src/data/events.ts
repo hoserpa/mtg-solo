@@ -134,5 +134,5 @@ export const INITIAL_EVENTS: EventDefinition[] = [
     enabled: true,
     effect: { type: "restriction", restriction: "cannotBlock", duration: 1 },
     resolutionMode: "manual",
-  }
+  },
 ];
