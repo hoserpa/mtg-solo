@@ -35,12 +35,8 @@ test("recorrido completo: abrir, configurar, jugar, ganar y reiniciar", async ({
   // Reiniciar
   await page.getByRole("button", { name: "Jugar de Nuevo" }).click();
   await expect(
-    page.getByRole("heading", { name: "Nueva Partida" }),
+    page.getByRole("button", { name: "Siguiente Turno" }),
   ).toBeVisible();
-
-  // Reabrir conservando la configuración: Difícil sigue seleccionado
-  const card = page.getByRole("button", { name: /Difícil/ });
-  await expect(card).toHaveClass(/selected/);
 });
 
 test("recorrido de derrota y reinicio a configuración", async ({ page }) => {

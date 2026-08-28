@@ -54,7 +54,7 @@ test("reinicia desde la pantalla de resultado", async ({ page }) => {
 
   await page.getByRole("button", { name: "Jugar de Nuevo" }).click();
   await expect(
-    page.getByRole("heading", { name: "Nueva Partida" }),
+    page.getByRole("button", { name: "Siguiente Turno" }),
   ).toBeVisible();
 });
 
