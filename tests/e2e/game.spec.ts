@@ -5,6 +5,7 @@ import {
   selectDifficulty,
   advanceTurn,
   nextTurnButton,
+  resolveFirstEvent,
 } from "./helpers";
 
 test("avanza turnos y rondas en una partida Fácil", async ({ page }) => {
@@ -24,21 +25,28 @@ test("resuelve un evento automático y permite seguir", async ({ page }) => {
   await selectDifficulty(page, "Difícil");
   await startGame(page);
 
-  // Avanzar turnos hasta que aparezca un evento (probabilidad por rondas).
-  let resolved = false;
-  for (let i = 0; i < 12; i++) {
-    const resolve = page.getByRole("button", { name: /Resolver evento/ });
-    if (await resolve.isVisible().catch(() => false)) {
-      await resolve.click();
-      await expect(resolve).toBeHidden();
-      resolved = true;
-      break;
-    }
-    await advanceTurn(page, 1);
-  }
-  expect(resolved, "debería aparecer un evento tras varios turnos").toBe(true);
+  await resolveFirstEvent(page);
 
   await expect(nextTurnButton(page)).toBeEnabled();
+});
+
+test("muestra el historial tras resolver un evento", async ({ page }) => {
+  await goToSetup(page);
+  await selectDifficulty(page, "Difícil");
+  await startGame(page);
+
+  // Fácil no genera eventos: el botón de historial no debe existir todavía.
+  await expect(page.getByLabel("Ver historial")).toHaveCount(0);
+
+  await resolveFirstEvent(page);
+
+  await page.getByLabel("Ver historial").click();
+  const dialog = page.getByRole("dialog", { name: "Historial de eventos" });
+  await expect(dialog).toBeVisible();
+  await expect(dialog.getByText("Historial")).toBeVisible();
+
+  await page.getByLabel("Cerrar historial").click();
+  await expect(dialog).toBeHidden();
 });
 
 test("un evento sin resolver bloquea el siguiente turno", async ({ page }) => {

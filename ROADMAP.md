@@ -546,43 +546,54 @@ Vite documenta específicamente el uso de GitHub Actions para compilar y publica
 
 ### Checklist MVP
 
-- [ ] Home.
-- [ ] Fácil.
-- [ ] Medio.
-- [ ] Difícil.
-- [ ] Personalizado.
-- [ ] Vida jugador.
-- [ ] Vida CPU.
-- [ ] Turnos.
-- [ ] Rondas.
-- [ ] Eventos.
-- [ ] Eventos ponderados.
-- [ ] Eventos automáticos.
-- [ ] Eventos manuales.
-- [ ] Historial.
-- [ ] Victoria.
-- [ ] Derrota.
-- [ ] Empate.
-- [ ] `localStorage`.
-- [ ] Responsive.
-- [ ] Accesibilidad básica.
-- [ ] Tests.
-- [ ] PWA.
-- [ ] CI.
-- [ ] Deploy.
+- [x] Home.
+- [x] Fácil.
+- [x] Medio.
+- [x] Difícil.
+- [x] Personalizado.
+- [x] Vida jugador.
+- [x] Vida CPU.
+- [x] Turnos.
+- [x] Rondas.
+- [x] Eventos.
+- [x] Eventos ponderados.
+- [x] Eventos automáticos.
+- [x] Eventos manuales.
+- [x] Historial.
+- [x] Victoria.
+- [x] Derrota.
+- [x] Empate.
+- [x] `localStorage`.
+- [x] Responsive.
+- [x] Accesibilidad básica.
+- [x] Tests.
+- [x] PWA.
+- [x] CI.
+- [x] Deploy.
 
 ### Criterio de salida
 
-- [ ] Un usuario puede abrir la web.
-- [ ] Elegir dificultad.
-- [ ] Empezar una partida.
-- [ ] Jugar una partida completa.
-- [ ] Recibir eventos.
-- [ ] Resolver eventos.
-- [ ] Ganar/perder/empatar.
-- [ ] Reiniciar.
-- [ ] Volver a abrir la app conservando configuración.
+- [x] Un usuario puede abrir la web.
+- [x] Elegir dificultad.
+- [x] Empezar una partida.
+- [x] Jugar una partida completa.
+- [x] Recibir eventos.
+- [x] Resolver eventos.
+- [x] Ganar/perder/empatar.
+- [x] Reiniciar.
+- [x] Volver a abrir la app conservando configuración.
 - [ ] Utilizarla desde móvil.
+
+> **Notas Fase 15 (MVP Release):** se añadieron dos tests E2E nuevos al finalizar
+> esta fase — `muestra el historial tras resolver un evento` (game.spec.ts) y el
+> `recorrido completo` + `recorrido de derrota` (flow.spec.ts), que cubren el
+> criterio de salida "jugar una partida completa". Total: 19 tests E2E verdes.
+>
+> Excepciones: el **Empate** no es alcanzable vía UI (una pulsación de vida solo
+> afecta a un bando y el juego termina al llegar uno a 0), por lo que se cubre
+> exclusivamente con tests unitarios del reducer; y **"Utilizarla desde móvil"**
+> queda pendiente hasta una comprobación en dispositivo real (o emulación) —
+> la app ya es responsive y PWA instalable.
 
 ---
 

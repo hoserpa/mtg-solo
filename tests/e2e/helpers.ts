@@ -31,6 +31,24 @@ export async function advanceTurn(page: Page, times = 1): Promise<void> {
   }
 }
 
+export async function resolveFirstEvent(
+  page: Page,
+  maxTurns = 12,
+): Promise<void> {
+  let resolved = false;
+  for (let i = 0; i < maxTurns; i++) {
+    const resolve = page.getByRole("button", { name: /Resolver evento/ });
+    if (await resolve.isVisible().catch(() => false)) {
+      await resolve.click();
+      await expect(resolve).toBeHidden();
+      resolved = true;
+      break;
+    }
+    await advanceTurn(page, 1);
+  }
+  expect(resolved, "debería aparecer un evento tras varios turnos").toBe(true);
+}
+
 export async function resolveFlow(page: Page): Promise<void> {
   const resolve = page.getByRole("button", { name: /Resolver evento/ });
   await expect(resolve).toBeVisible();
