@@ -609,15 +609,32 @@ Vite documenta específicamente el uso de GitHub Actions para compilar y publica
 - [ ] Registrar qué eventos no aportan valor.
 - [ ] Ajustar pesos.
 - [ ] Ajustar daño.
-- [ ] Ajustar frecuencia.
+- [x] Ajustar frecuencia.
 - [ ] Ajustar número de cartas afectadas.
-- [ ] Comprobar que Difícil realmente sea más exigente que Medio.
-- [ ] Comprobar que Fácil permita practicar sin demasiada interferencia.
+- [x] Comprobar que Difícil realmente sea más exigente que Medio.
+- [x] Comprobar que Fácil permita practicar sin demasiada interferencia.
 
 ### Resultado
 
-- [ ] Las dificultades tienen una progresión perceptible.
+- [x] Las dificultades tienen una progresión perceptible.
 - [ ] Los eventos añaden presión sin convertir la partida en puro azar.
+
+> **Notas Fase 16 (balance aplicado):** se corrigieron dos problemas estructurales
+> de progresión en `difficulties.ts`: (1) **Fácil y Medio eran idénticos** (ambos
+> sin eventos) → ahora **Medio activa eventos ligeros** (frecuencia 0.35,
+> `maxConsecutiveEvents: 1`, incluye el evento de respiro "nothing"); (2)
+> **Difícil saturaba desde ronda 1** (probabilidad 1.0) → ahora usa **0.6 de base
+> con `maxConsecutiveEvents: 2`**, de modo que el escalado por rondas es
+> perceptible (r1≈0.3 → r5≈0.9 → tope 0.95 sin llegar a azar puro). Fácil
+> permanece sin eventos (práctica sin interferencia). Se añadió
+> `src/data/__tests__/difficulties.test.ts` (7 tests) que formaliza la
+> progresión fácil&lt;medio&lt;difícil y el escalado.
+>
+> **Pendientes (playtesting humano):** jugar partidas, registrar qué eventos se
+> sienten frecuentes/castigadores/sin valor, y el ajuste fino de pesos, daño y
+> número de cartas afectadas. Esos ajustes quedan deliberadamente sin tocar hasta
+> tener feedback real de partidas. El criterio "los eventos añaden presión sin
+> convertir la partida en puro azar" depende también de ese playtesting.
 
 ---
 
