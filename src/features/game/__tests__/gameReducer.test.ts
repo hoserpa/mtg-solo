@@ -8,6 +8,14 @@ import {
   gameReducer,
 } from "../gameReducer";
 import type { GameConfig, GameState } from "../gameTypes";
+import {
+  selectEventForRound,
+  canTriggerConsecutiveEvent,
+} from "@/features/events/eventEngine";
+import { filterEventsForConfig } from "@/features/events/eventSelector";
+import { INITIAL_EVENTS } from "@/data/events";
+import { DIFFICULTY_PRESETS } from "@/data/difficulties";
+import { SeededRandom } from "@/lib/random";
 
 const defaultConfig: GameConfig = {
   mode: "hard",
@@ -323,5 +331,99 @@ describe("gameReducer", () => {
       const result = gameReducer(state, { type: "RESET_GAME" }, defaultConfig);
       expect(result.status).toBe("playing");
     });
+  });
+});
+
+describe("regresión: los eventos no se agotan tras el primer evento (bug 1/2)", () => {
+  function simulateMediumGame(seed: string, maxRounds: number): number {
+    const config = DIFFICULTY_PRESETS.medium;
+    const enabledEvents = filterEventsForConfig(
+      INITIAL_EVENTS,
+      config.enabledEventIds,
+    );
+    const rng = new SeededRandom(seed);
+    let state = createGameState(config);
+
+    for (let round = 1; round <= maxRounds; round++) {
+      const newGame = gameReducer(state, { type: "NEXT_TURN" }, config);
+      if (newGame.status !== "playing") break;
+
+      const canTrigger = canTriggerConsecutiveEvent(
+        newGame,
+        config.maxConsecutiveEvents,
+      );
+      if (canTrigger) {
+        const event = selectEventForRound(
+          newGame,
+          enabledEvents,
+          config.eventFrequency,
+          rng,
+        );
+        if (event) {
+          newGame.eventHistory = [
+            ...newGame.eventHistory,
+            {
+              turn: newGame.turn,
+              round: newGame.round,
+              eventId: event.id,
+              timestamp: "",
+            },
+          ];
+        }
+      }
+      state = newGame;
+    }
+    return state.eventHistory.filter((e) => e.eventId !== "nothing").length;
+  }
+
+  it("una partida completa en Medio genera varios eventos, no uno solo", () => {
+    let total = 0;
+    for (let s = 0; s < 20; s++) {
+      total += simulateMediumGame(`medio-${s}`, 20);
+    }
+    expect(total).toBeGreaterThan(20);
+  });
+
+  it("una partida completa en Difícil genera varios eventos, no solo dos", () => {
+    const config = DIFFICULTY_PRESETS.hard;
+    const enabledEvents = filterEventsForConfig(
+      INITIAL_EVENTS,
+      config.enabledEventIds,
+    );
+    let total = 0;
+    for (let s = 0; s < 20; s++) {
+      const rng = new SeededRandom(`duro-${s}`);
+      let state = createGameState(config);
+      for (let round = 1; round <= 20; round++) {
+        const newGame = gameReducer(state, { type: "NEXT_TURN" }, config);
+        if (newGame.status !== "playing") break;
+        const canTrigger = canTriggerConsecutiveEvent(
+          newGame,
+          config.maxConsecutiveEvents,
+        );
+        if (canTrigger) {
+          const event = selectEventForRound(
+            newGame,
+            enabledEvents,
+            config.eventFrequency,
+            rng,
+          );
+          if (event) {
+            newGame.eventHistory = [
+              ...newGame.eventHistory,
+              {
+                turn: newGame.turn,
+                round: newGame.round,
+                eventId: event.id,
+                timestamp: "",
+              },
+            ];
+          }
+        }
+        state = newGame;
+      }
+      total += state.eventHistory.filter((e) => e.eventId !== "nothing").length;
+    }
+    expect(total).toBeGreaterThan(40);
   });
 });

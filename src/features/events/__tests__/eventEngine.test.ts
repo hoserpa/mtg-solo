@@ -106,24 +106,52 @@ describe("canTriggerConsecutiveEvent", () => {
     expect(result).toBe(true);
   });
 
-  it("bloquea si se alcanzó el límite", () => {
+  it("bloquea si se alcanzó el límite de eventos en turnos consecutivos", () => {
     const state: GameState = {
       ...createGameState(defaultConfig),
+      round: 3,
       eventHistory: [
-        { turn: 1, round: 1, eventId: "damage-3", timestamp: "" },
-        { turn: 2, round: 1, eventId: "damage-2", timestamp: "" },
+        { turn: 3, round: 1, eventId: "damage-3", timestamp: "" },
+        { turn: 5, round: 2, eventId: "damage-2", timestamp: "" },
       ],
     };
     const result = canTriggerConsecutiveEvent(state, 2);
     expect(result).toBe(false);
   });
 
+  it("permite de nuevo tras un turno sin evento (reinicia la racha)", () => {
+    const state: GameState = {
+      ...createGameState(defaultConfig),
+      round: 4,
+      eventHistory: [
+        { turn: 3, round: 1, eventId: "damage-3", timestamp: "" },
+        { turn: 5, round: 2, eventId: "damage-2", timestamp: "" },
+      ],
+    };
+    const result = canTriggerConsecutiveEvent(state, 2);
+    expect(result).toBe(true);
+  });
+
+  it("un único evento con límite 1 bloquea solo el turno inmediato", () => {
+    const state: GameState = {
+      ...createGameState(defaultConfig),
+      round: 4,
+      eventHistory: [
+        { turn: 5, round: 2, eventId: "damage-3", timestamp: "" },
+        { turn: 7, round: 3, eventId: "damage-2", timestamp: "" },
+      ],
+    };
+    const result = canTriggerConsecutiveEvent(state, 1);
+    expect(result).toBe(false);
+  });
+
   it("cuenta solo eventos que no son 'nothing'", () => {
     const state: GameState = {
       ...createGameState(defaultConfig),
+      round: 4,
       eventHistory: [
         { turn: 1, round: 1, eventId: "nothing", timestamp: "" },
-        { turn: 2, round: 1, eventId: "damage-3", timestamp: "" },
+        { turn: 7, round: 3, eventId: "damage-3", timestamp: "" },
       ],
     };
     const result = canTriggerConsecutiveEvent(state, 2);

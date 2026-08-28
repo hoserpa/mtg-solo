@@ -75,11 +75,18 @@ export function canTriggerConsecutiveEvent(
 ): boolean {
   if (maxConsecutive <= 0) return false;
 
+  const history = state.eventHistory;
   let consecutive = 0;
-  for (let i = state.eventHistory.length - 1; i >= 0; i--) {
-    const entry = state.eventHistory[i];
+  let expectedRound = state.round - 1;
+
+  for (let i = history.length - 1; i >= 0; i--) {
+    const entry = history[i];
     if (entry.eventId === "nothing") break;
+
+    if (entry.round !== expectedRound) break;
+
     consecutive++;
+    expectedRound--;
   }
 
   return consecutive < maxConsecutive;
