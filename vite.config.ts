@@ -15,7 +15,7 @@ export default defineConfig({
     }),
     VitePWA({
       registerType: "prompt",
-      includeAssets: ["favicon.svg", "icons.svg", "pwa-64x64.png"],
+      includeAssets: ["pwa-64x64.png"],
       manifest: {
         name: "MTG Practice",
         short_name: "MTG Practice",

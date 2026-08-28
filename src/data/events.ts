@@ -134,15 +134,5 @@ export const INITIAL_EVENTS: EventDefinition[] = [
     enabled: true,
     effect: { type: "restriction", restriction: "cannotBlock", duration: 1 },
     resolutionMode: "manual",
-  },
-  {
-    id: "nothing",
-    name: "Calma",
-    description: "El rival no hace nada.",
-    category: "neutral",
-    weight: 25,
-    enabled: true,
-    effect: { type: "none" },
-    resolutionMode: "automatic",
-  },
+  }
 ];

@@ -47,8 +47,7 @@ export function App() {
         <Result
           game={game.state.game}
           onPlayAgain={() => {
-            game.resetGame();
-            game.navigate("setup");
+            game.startGame();
           }}
           onChangeConfig={() => {
             game.resetGame();
