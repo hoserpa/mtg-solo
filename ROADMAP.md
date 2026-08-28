@@ -465,15 +465,23 @@ Implementar inicialmente:
 
 **Objetivo:** automatizar la comprobación del proyecto.
 
-- [ ] Crear GitHub Actions.
-- [ ] Ejecutar `npm ci`.
-- [ ] Ejecutar lint.
-- [ ] Ejecutar typecheck.
-- [ ] Ejecutar tests unitarios.
-- [ ] Ejecutar build.
-- [ ] Ejecutar E2E.
-- [ ] Hacer que un fallo bloquee el merge.
-- [ ] Configurar previews para cambios si el hosting lo permite.
+- [x] Crear GitHub Actions.
+- [x] Ejecutar `npm ci`.
+- [x] Ejecutar lint.
+- [x] Ejecutar typecheck.
+- [x] Ejecutar tests unitarios.
+- [x] Ejecutar build.
+- [x] Ejecutar E2E.
+- [x] Hacer que un fallo bloquee el merge.
+- [ ] Configurar previews para cambios.
+
+> **Notas sobre CI/CD:** el workflow (`deploy.yml`) también se ejecuta en
+> `pull_request` a `main` (además de en `push`), de modo que un fallo en
+> format/lint/typecheck/test/build/E2E bloquea el merge. El job de **deploy**
+> solo se ejecuta en pushes a `main`. Los _previews_ por PR no están disponibles:
+> GitHub Pages es un hosting estático sin entornos de previsualización por PR
+> (el ítem queda pendiente y solo sería aplicable si se migra a otro hosting,
+> p. ej. Vercel o Netlify).
 
 Pipeline objetivo:
 
