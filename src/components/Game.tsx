@@ -26,6 +26,13 @@ export function Game({
   const historyCloseRef = useRef<HTMLButtonElement>(null);
   const lastFocusedRef = useRef<HTMLElement | null>(null);
 
+  const activeEvent = game.currentEvent
+    ? getEventById(game.currentEvent.eventId)
+    : null;
+
+  const hasUnresolvedEvent =
+    game.currentEvent !== null && !game.currentEvent.resolved;
+
   useEffect(() => {
     if (historyOpen) {
       lastFocusedRef.current = document.activeElement as HTMLElement | null;
@@ -45,12 +52,28 @@ export function Game({
     return () => window.removeEventListener("keydown", onKeyDown);
   }, [historyOpen]);
 
-  const activeEvent = game.currentEvent
-    ? getEventById(game.currentEvent.eventId)
-    : null;
-
-  const hasUnresolvedEvent =
-    game.currentEvent !== null && !game.currentEvent.resolved;
+  useEffect(() => {
+    if (historyOpen) return;
+    const onKeyDown = (e: KeyboardEvent) => {
+      if (e.key !== " " && e.key !== "Enter") return;
+      const tag = document.activeElement?.tagName;
+      if (
+        tag === "BUTTON" ||
+        tag === "A" ||
+        tag === "INPUT" ||
+        tag === "TEXTAREA" ||
+        tag === "SELECT"
+      )
+        return;
+      if (hasUnresolvedEvent) {
+        onResolveEvent();
+      } else {
+        onNextTurn();
+      }
+    };
+    window.addEventListener("keydown", onKeyDown);
+    return () => window.removeEventListener("keydown", onKeyDown);
+  }, [historyOpen, hasUnresolvedEvent, onResolveEvent, onNextTurn]);
 
   const playerDanger = game.playerLife <= 5;
   const cpuDanger = game.cpuLife <= 5;

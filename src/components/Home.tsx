@@ -15,10 +15,6 @@ export function Home({ onNewGame }: HomeProps) {
           width={280}
           height={164}
         />
-        <h1 className={styles.title}>MTG Practice</h1>
-        <p className={styles.subtitle}>
-          Entrena tus partidas contra una dificultad configurable.
-        </p>
       </div>
       <button
         className={styles.newGameButton}

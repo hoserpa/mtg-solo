@@ -3,9 +3,7 @@ import { goToSetup, startGame, selectDifficulty, spinbutton } from "./helpers";
 
 test("abre la aplicación y muestra el inicio", async ({ page }) => {
   await page.goto("/");
-  await expect(
-    page.getByRole("heading", { name: "MTG Practice" }),
-  ).toBeVisible();
+  await expect(page.getByRole("img", { name: "MTG Practice" })).toBeVisible();
   await expect(
     page.getByRole("button", { name: "Nueva Partida" }),
   ).toBeVisible();
