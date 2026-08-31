@@ -63,6 +63,7 @@ export default defineConfig({
       workbox: {
         cleanupOutdatedCaches: true,
         globPatterns: ["**/*.{js,css,html,svg,png,ico,webmanifest}"],
+        globIgnores: ["**/icon_v1.png", "**/favicon.svg"],
       },
     }),
   ],
