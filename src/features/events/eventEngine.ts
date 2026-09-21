@@ -28,12 +28,38 @@ export function calculateRoundScaledProbability(
   baseProbability: number,
   currentRound: number,
 ): number {
-  if (currentRound <= 1) return baseProbability * 0.5;
-
-  const scaling = 1 + (currentRound - 1) * 0.5;
+  const scaling = 1 + (currentRound - 1) * 0.1;
   const scaled = baseProbability * scaling;
 
   return Math.min(scaled, 0.95);
+}
+
+export function calculateRoundScaledDamage(
+  baseDamage: number,
+  currentRound: number,
+): number {
+  return baseDamage + Math.floor((currentRound - 1) / 2);
+}
+
+export function resolveScaledEvent(
+  event: EventDefinition,
+  currentRound: number,
+): EventDefinition {
+  if (event.effect.type !== "damagePlayer") return event;
+
+  const scaledAmount = calculateRoundScaledDamage(
+    event.effect.amount,
+    currentRound,
+  );
+
+  return {
+    ...event,
+    effect: { ...event.effect, amount: scaledAmount },
+    description: event.description.replace(
+      String(event.effect.amount),
+      String(scaledAmount),
+    ),
+  };
 }
 
 export function selectEventForRound(

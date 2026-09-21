@@ -51,11 +51,13 @@ describe("escalado por rondas perceptible", () => {
     expect(r4).toBeGreaterThan(r2);
   });
 
-  it("la ronda 1 de difícil es notablemente más tranquila que rondas finales", () => {
+  it("la ronda 1 de difícil ya parte de la probabilidad base y sube hasta el tope", () => {
     const base = chanceProbability(DIFFICULTY_PRESETS.hard);
     const r1 = calculateRoundScaledProbability(base, 1);
     const late = calculateRoundScaledProbability(base, 10);
-    expect(r1 * 3).toBeLessThan(late);
+    expect(r1).toBe(base);
+    expect(late).toBeGreaterThan(r1);
+    expect(late).toBeLessThanOrEqual(0.95);
   });
 
   it("el escalado no convierte el juego en azar puro (tope 0.95)", () => {

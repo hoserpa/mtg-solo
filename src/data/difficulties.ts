@@ -25,7 +25,7 @@ export const DIFFICULTY_PRESETS: Record<string, GameConfig> = {
     turnsPerRound: TURNS_PER_ROUND,
     maxRounds: 20,
     eventsEnabled: true,
-    eventFrequency: { type: "chance", probability: 0.35 },
+    eventFrequency: { type: "chance", probability: 0.45 },
     maxConsecutiveEvents: 1,
     enabledEventIds: [
       "damage-2",
@@ -44,7 +44,7 @@ export const DIFFICULTY_PRESETS: Record<string, GameConfig> = {
     turnsPerRound: TURNS_PER_ROUND,
     maxRounds: 20,
     eventsEnabled: true,
-    eventFrequency: { type: "chance", probability: 0.6 },
+    eventFrequency: { type: "chance", probability: 0.7 },
     maxConsecutiveEvents: 2,
     enabledEventIds: [
       "damage-3",

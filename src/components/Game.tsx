@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from "react";
 import type { GameState, GameConfig } from "@/features/game/gameTypes";
 import { getEventById } from "@/features/events/eventRegistry";
+import { resolveScaledEvent } from "@/features/events/eventEngine";
 import XIcon from "~icons/lucide/x";
 import HistoryIcon from "~icons/lucide/history";
 import styles from "./Game.module.css";
@@ -26,8 +27,12 @@ export function Game({
   const historyCloseRef = useRef<HTMLButtonElement>(null);
   const lastFocusedRef = useRef<HTMLElement | null>(null);
 
-  const activeEvent = game.currentEvent
+  const baseEvent = game.currentEvent
     ? getEventById(game.currentEvent.eventId)
+    : undefined;
+
+  const activeEvent = baseEvent
+    ? resolveScaledEvent(baseEvent, game.round)
     : null;
 
   const hasUnresolvedEvent =

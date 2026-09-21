@@ -3,7 +3,10 @@ import {
   shouldTriggerEvent,
   calculateRoundScaledProbability,
   canTriggerConsecutiveEvent,
+  calculateRoundScaledDamage,
+  resolveScaledEvent,
 } from "../eventEngine";
+import { getEventById } from "../eventRegistry";
 import type { GameState } from "@/features/game/gameTypes";
 import { SeededRandom } from "@/lib/random";
 import { createGameState } from "@/features/game/gameReducer";
@@ -75,9 +78,9 @@ describe("shouldTriggerEvent", () => {
 });
 
 describe("calculateRoundScaledProbability", () => {
-  it("reduce la probabilidad en ronda 1", () => {
+  it("usa la probabilidad base en ronda 1", () => {
     const result = calculateRoundScaledProbability(0.5, 1);
-    expect(result).toBe(0.25);
+    expect(result).toBe(0.5);
   });
 
   it("aumenta la probabilidad en rondas superiores", () => {
@@ -93,9 +96,49 @@ describe("calculateRoundScaledProbability", () => {
     expect(result).toBe(0.95);
   });
 
-  it("preserva la probabilidad base en ronda 2", () => {
+  it("escalada correcta en ronda 2", () => {
     const result = calculateRoundScaledProbability(0.5, 2);
-    expect(result).toBe(0.75);
+    expect(result).toBe(0.55);
+  });
+});
+
+describe("calculateRoundScaledDamage", () => {
+  it("mantiene el daño base en ronda 1", () => {
+    expect(calculateRoundScaledDamage(3, 1)).toBe(3);
+  });
+
+  it("mantiene el daño base en ronda 2", () => {
+    expect(calculateRoundScaledDamage(3, 2)).toBe(3);
+  });
+
+  it("aumenta +1 cada dos rondas", () => {
+    expect(calculateRoundScaledDamage(3, 3)).toBe(4);
+    expect(calculateRoundScaledDamage(3, 5)).toBe(5);
+    expect(calculateRoundScaledDamage(3, 7)).toBe(6);
+  });
+});
+
+describe("resolveScaledEvent", () => {
+  it("escala el daño y la descripción de un evento de ataque", () => {
+    const event = getEventById("damage-3");
+    if (!event) throw new Error("evento no encontrado");
+    const scaled = resolveScaledEvent(event, 5);
+    expect(scaled.effect).toEqual({ type: "damagePlayer", amount: 5 });
+    expect(scaled.description).toBe("El rival ataca. Recibes 5 de daño.");
+  });
+
+  it("no modifica eventos que no causan daño al jugador", () => {
+    const event = getEventById("cpu-gain-life-4");
+    if (!event) throw new Error("evento no encontrado");
+    const scaled = resolveScaledEvent(event, 7);
+    expect(scaled).toBe(event);
+  });
+
+  it("no modifica el evento base original", () => {
+    const event = getEventById("damage-2");
+    if (!event) throw new Error("evento no encontrado");
+    resolveScaledEvent(event, 9);
+    expect(event.effect).toEqual({ type: "damagePlayer", amount: 2 });
   });
 });
 
