@@ -59,6 +59,7 @@ export const DIFFICULTY_PRESETS: Record<string, GameConfig> = {
       "cannot-attack",
       "destroy-permanent-1",
       "sacrifice-1",
+      "destroy-strongest-creature",
       "cannot-block",
     ],
   },

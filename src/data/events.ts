@@ -126,6 +126,16 @@ export const INITIAL_EVENTS: EventDefinition[] = [
     resolutionMode: "manual",
   },
   {
+    id: "destroy-strongest-creature",
+    name: "El más fuerte cae",
+    description: "El rival envía al cementerio a tu criatura con más poder.",
+    category: "destroy",
+    weight: 8,
+    enabled: true,
+    effect: { type: "destroyStrongestCreature" },
+    resolutionMode: "manual",
+  },
+  {
     id: "cannot-block",
     name: "No puedes bloquear",
     description: "El rival te impide bloquear este turno.",

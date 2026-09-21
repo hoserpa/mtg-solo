@@ -16,6 +16,7 @@ export type EventEffect =
   | { type: "discardCards"; amount: number }
   | { type: "destroyCards"; amount: number }
   | { type: "destroyPermanent"; permanentTypes: string[]; amount: number }
+  | { type: "destroyStrongestCreature" }
   | { type: "sacrifice"; amount: number }
   | { type: "restriction"; restriction: string; duration: number }
   | { type: "none" };
