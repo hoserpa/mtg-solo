@@ -82,6 +82,7 @@ export function Game({
 
   const playerDanger = game.playerLife <= 5;
   const cpuDanger = game.cpuLife <= 5;
+  const activeSide = hasUnresolvedEvent ? "rival" : "player";
 
   return (
     <div className={styles.gameContainer}>
@@ -118,8 +119,19 @@ export function Game({
         )}
       </div>
 
-      <div className={styles.playerSection}>
-        <span className={styles.playerLabel}>Rival</span>
+      <span className={styles.visuallyHidden} aria-live="polite">
+        {activeSide === "rival" ? "Turno del rival" : "Tu turno"}
+      </span>
+
+      <div
+        className={`${styles.playerSection} ${activeSide === "rival" ? styles.activeField : ""}`}
+      >
+        <span className={styles.playerLabel}>
+          Rival
+          {activeSide === "rival" && (
+            <span className={styles.turnTag}>En turno</span>
+          )}
+        </span>
         <span
           className={`${styles.lifeValue} ${cpuDanger ? styles.danger : ""}`}
           aria-live="polite"
@@ -192,8 +204,15 @@ export function Game({
 
       <div className={styles.divider} />
 
-      <div className={styles.playerSection}>
-        <span className={styles.playerLabel}>Jugador</span>
+      <div
+        className={`${styles.playerSection} ${activeSide === "player" ? styles.activeField : ""}`}
+      >
+        <span className={styles.playerLabel}>
+          Jugador
+          {activeSide === "player" && (
+            <span className={styles.turnTag}>En turno</span>
+          )}
+        </span>
         <span
           className={`${styles.lifeValue} ${playerDanger ? styles.danger : ""}`}
           aria-live="polite"

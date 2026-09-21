@@ -91,6 +91,44 @@
   gap: var(--mtg-space-2);
 }
 
+.activeField {
+  border: 1px solid var(--mtg-gold-500);
+  border-radius: var(--mtg-radius-card);
+  background: linear-gradient(180deg, var(--mtg-felt-600), var(--mtg-felt-800));
+  box-shadow: var(--mtg-glow-gold);
+  margin: var(--mtg-space-2) var(--mtg-space-4);
+  transition: box-shadow 0.2s ease;
+}
+
+.activeField .playerLabel {
+  color: var(--mtg-gold-300);
+}
+
+.turnTag {
+  display: inline-block;
+  margin-left: var(--mtg-space-2);
+  padding: 2px 6px;
+  font-family: var(--mtg-font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--mtg-ink);
+  background: linear-gradient(180deg, var(--mtg-gold-400), var(--mtg-stitch));
+  border-radius: var(--mtg-radius-sm);
+}
+
+.visuallyHidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
 .playerLabel {
   font-family: var(--mtg-font-mono);
   font-size: 0.7rem;
@@ -416,5 +454,11 @@
 
   .lifeValue {
     font-size: 4.5rem;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .activeField {
+    transition: none;
   }
 }
