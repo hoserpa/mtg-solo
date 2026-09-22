@@ -903,3 +903,5 @@ El primer objetivo práctico debería ser extremadamente pequeño:
 > **Primero hacer que sea divertido y fiable con una partida mínima. Después añadir profundidad.**
 
 El proyecto debe poder seguir funcionando perfectamente aunque nunca se llegue a implementar la simulación completa de un mazo de MTG.
+
+https://github.com/Saeris/typeface-beleren-bold

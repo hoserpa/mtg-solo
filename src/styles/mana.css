@@ -81,6 +81,10 @@
   content: "\e940";
 }
 
+.ms-loyalty-up::before {
+  content: "\e627";
+}
+
 .ms-loyalty-down::before {
   content: "\e625";
 }

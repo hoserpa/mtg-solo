@@ -8,9 +8,9 @@ type ResultProps = {
 };
 
 const RESULT_CONFIG = {
-  won: { icon: "🏆", title: "Victoria", className: styles.won },
-  lost: { icon: "💀", title: "Derrota", className: styles.lost },
-  draw: { icon: "🤝", title: "Empate", className: styles.draw },
+  won: { icon: "ms-loyalty-up", title: "Victoria", className: styles.won },
+  lost: { icon: "ms-loyalty-down", title: "Derrota", className: styles.lost },
+  draw: { icon: "ms-tap", title: "Empate", className: styles.draw },
 } as const;
 
 export function Result({ game, onPlayAgain, onChangeConfig }: ResultProps) {
@@ -19,7 +19,9 @@ export function Result({ game, onPlayAgain, onChangeConfig }: ResultProps) {
 
   return (
     <div className={styles.container}>
-      <div className={styles.resultIcon}>{config.icon}</div>
+      <div className={styles.resultIcon}>
+        <i className={`ms ${config.icon}`} aria-hidden="true" />
+      </div>
       <h1
         className={`${styles.resultTitle} ${config.className}`}
         role="status"
