@@ -6,10 +6,6 @@ import XIcon from "~icons/lucide/x";
 import HistoryIcon from "~icons/lucide/history";
 import styles from "./Game.module.css";
 
-const EVENT_GLYPHS: Record<string, string> = {
-  "unblockable-attack": "ms-ability-unblockable",
-};
-
 type GameProps = {
   game: GameState;
   config: GameConfig;
@@ -191,11 +187,8 @@ export function Game({
           <>
             <span className={styles.eventLabel}>Evento</span>
             <span className={styles.eventName}>
-              {EVENT_GLYPHS[game.currentEvent.eventId] && (
-                <i
-                  className={`ms ${EVENT_GLYPHS[game.currentEvent.eventId]}`}
-                  aria-hidden="true"
-                />
+              {activeEvent.icon && (
+                <i className={`ms ${activeEvent.icon}`} aria-hidden="true" />
               )}
               {activeEvent.name}
             </span>

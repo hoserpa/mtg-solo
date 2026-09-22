@@ -42,6 +42,8 @@ export type EventDefinition = {
   effect: EventEffect;
   resolutionMode: EventResolutionMode;
   balance?: EventBalance;
+  /** Clase de glifo Mana (p. ej. `ms-ability-exile`) que ilustra la acción. */
+  icon?: string;
 };
 
 export type WeightedEvent = {

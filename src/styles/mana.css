@@ -45,8 +45,44 @@
   content: "\e61a";
 }
 
+.ms-ability-deathtouch::before {
+  content: "\e94b";
+}
+
+.ms-ability-defender::before {
+  content: "\e94c";
+}
+
+.ms-ability-duels-exile::before {
+  content: "\ea69";
+}
+
+.ms-ability-duels-must-attack::before {
+  content: "\ea7c";
+}
+
+.ms-ability-lifelink::before {
+  content: "\ea4b";
+}
+
+.ms-ability-surveil::before {
+  content: "\ea38";
+}
+
 .ms-ability-unblockable::before {
   content: "\ea5c";
+}
+
+.ms-counter-doom::before {
+  content: "\e92f";
+}
+
+.ms-counter-skull::before {
+  content: "\e940";
+}
+
+.ms-loyalty-down::before {
+  content: "\e625";
 }
 
 .ms-cost {
