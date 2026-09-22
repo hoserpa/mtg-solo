@@ -8,6 +8,7 @@ import {
   canTriggerConsecutiveEvent,
 } from "@/features/events/eventEngine";
 import { INITIAL_EVENTS } from "@/data/events";
+import { MANA_COLORS } from "@/data/manaColors";
 import { validateGameConfig } from "@/lib/validation";
 import { createRandomGenerator, type RandomGenerator } from "@/lib/random";
 import { getBrowserStorage } from "@/lib/browserStorage";
@@ -60,8 +61,11 @@ export function useGame() {
     const validation = validateGameConfig(state.config);
     if (!validation.valid) return;
 
-    const game = createGameState(state.config);
     rngRef.current = createRandomGenerator();
+    const game = createGameState(
+      state.config,
+      rngRef.current.pick(MANA_COLORS),
+    );
 
     setState((prev) => ({
       ...prev,

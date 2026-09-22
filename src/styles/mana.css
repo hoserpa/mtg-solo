@@ -1,0 +1,97 @@
+/* ponytail: vendored subset of mana-font (v1.18.0). Solo los glifos usados
+   por la app; sync manual de los codigos `content` al actualizar el paquete. */
+
+@font-face {
+  font-family: "Mana";
+  src: url("mana-font/fonts/mana.woff2") format("woff2");
+  font-weight: normal;
+  font-style: normal;
+}
+
+.ms {
+  display: inline-block;
+  font: normal normal normal 14px Mana;
+  font-size: inherit;
+  line-height: 1em;
+  text-rendering: auto;
+  speak: none;
+  text-transform: none;
+  vertical-align: middle;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.ms-w::before {
+  content: "\e600";
+}
+
+.ms-u::before {
+  content: "\e601";
+}
+
+.ms-b::before {
+  content: "\e602";
+}
+
+.ms-g::before {
+  content: "\e604";
+}
+
+.ms-r::before {
+  content: "\e603";
+}
+
+.ms-tap::before {
+  content: "\e61a";
+}
+
+.ms-ability-unblockable::before {
+  content: "\ea5c";
+}
+
+.ms-cost {
+  background-color: #beb9b2;
+  border-radius: 1em;
+  color: #111;
+  font-size: 0.95em;
+  width: 1.3em;
+  height: 1.3em;
+  line-height: 1.35em;
+  text-align: center;
+  /* ponytail: el tracking heredado (p.ej. 0.15em del label) empuja la tinta
+     a la izquierda dentro del orbe; se resetea solo en el cost. */
+  letter-spacing: normal;
+}
+
+/* ponytail: la tinta de los glifos Mana cae ~0.037em por debajo del em-box
+   (medido por bounding-box de pixeles); un solo ajuste para todos los colores. */
+.ms-cost::before {
+  display: inline-block;
+  transform: translateY(-0.037em);
+}
+
+/* El glifo e603 (rojo) se dibuja ~+0.027em a la derecha de su advance
+   (medido: los demás colores ~0.004em, sin ajuste). */
+.ms-cost.ms-r::before {
+  transform: translateX(-0.027em) translateY(-0.037em);
+}
+
+.ms-cost.ms-w {
+  background-color: #f0f2c0;
+}
+
+.ms-cost.ms-u {
+  background-color: #b5cde3;
+}
+
+.ms-cost.ms-b {
+  background-color: #aca29a;
+}
+
+.ms-cost.ms-r {
+  background-color: #db8664;
+}
+
+.ms-cost.ms-g {
+  background-color: #93b483;
+}

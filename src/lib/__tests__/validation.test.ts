@@ -3,7 +3,8 @@ import { validateGameConfig } from "../validation";
 import type { GameConfig } from "@/features/game/gameTypes";
 
 const validConfig: GameConfig = {
-  mode: "hard",
+  mode: "easy",
+  playerMana: "g",
   playerInitialLife: 20,
   cpuInitialLife: 20,
   turnsEnabled: true,

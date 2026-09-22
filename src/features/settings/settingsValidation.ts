@@ -1,5 +1,6 @@
 import type { Difficulty, GameConfig } from "@/features/game/gameTypes";
 import type { EventFrequency } from "@/features/events/eventTypes";
+import { isManaColor } from "@/data/manaColors";
 import type {
   PersistedData,
   Statistics,
@@ -104,6 +105,7 @@ export function parseGameConfig(value: unknown): GameConfig | null {
 
   return {
     mode: value.mode,
+    playerMana: isManaColor(value.playerMana) ? value.playerMana : "g",
     playerInitialLife: value.playerInitialLife,
     cpuInitialLife: value.cpuInitialLife,
     turnsEnabled: value.turnsEnabled,

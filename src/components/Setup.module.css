@@ -96,9 +96,9 @@
   box-shadow: inset 0 0 0 2px rgba(255, 255, 255, 0.18);
 }
 
-.manaBadge svg {
-  width: 22px;
-  height: 22px;
+.manaBadge :global(.ms) {
+  font-size: 1.5rem;
+  line-height: 1;
 }
 
 .manaBadge--white {
@@ -288,6 +288,34 @@
   font-size: 0.75rem;
   color: var(--mtg-parchment-200);
   font-style: italic;
+}
+
+.manaPicker {
+  display: flex;
+  align-items: center;
+  gap: var(--mtg-space-2);
+}
+
+.manaPicker :global(.ms) {
+  font-size: 1.4rem;
+  flex-shrink: 0;
+}
+
+.configSelect {
+  font-family: var(--mtg-font-body);
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--mtg-ink);
+  background: var(--mtg-parchment-100);
+  border: 1px solid var(--mtg-parchment-300);
+  border-radius: var(--mtg-radius-sm);
+  padding: var(--mtg-space-1) var(--mtg-space-2);
+}
+
+.configSelect:focus-visible {
+  outline: none;
+  border-color: var(--mtg-gold-500);
+  box-shadow: var(--mtg-glow-gold);
 }
 
 .advanced {

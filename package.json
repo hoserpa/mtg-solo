@@ -20,7 +20,6 @@
     "react-dom": "^19.1.0"
   },
   "devDependencies": {
-    "@iconify-json/game-icons": "^1.2.4",
     "@iconify-json/lucide": "^1.2.126",
     "@playwright/test": "^1.62.1",
     "@svgr/core": "^8.1.0",
@@ -35,6 +34,7 @@
     "eslint-plugin-react-refresh": "^0.4.19",
     "globals": "^16.0.0",
     "jsdom": "^26.1.0",
+    "mana-font": "^1.18.0",
     "prettier": "^3.5.3",
     "typescript": "~5.8.3",
     "typescript-eslint": "^8.31.0",

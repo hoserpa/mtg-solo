@@ -1,8 +1,12 @@
-import type { GameConfig, GameState, GameAction } from "./gameTypes";
+import type { GameConfig, GameState, GameAction, ManaColor } from "./gameTypes";
 
-export function createGameState(config: GameConfig): GameState {
+export function createGameState(
+  config: GameConfig,
+  cpuMana: ManaColor = "r",
+): GameState {
   return {
     status: "playing",
+    cpuMana,
     playerLife: config.playerInitialLife,
     cpuLife: config.cpuInitialLife,
     turn: 1,

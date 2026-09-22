@@ -14,6 +14,7 @@ import type { GameConfig } from "@/features/game/gameTypes";
 
 const defaultConfig: GameConfig = {
   mode: "hard",
+  playerMana: "g",
   playerInitialLife: 20,
   cpuInitialLife: 20,
   turnsEnabled: true,

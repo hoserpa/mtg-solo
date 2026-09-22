@@ -6,6 +6,10 @@ import XIcon from "~icons/lucide/x";
 import HistoryIcon from "~icons/lucide/history";
 import styles from "./Game.module.css";
 
+const EVENT_GLYPHS: Record<string, string> = {
+  "unblockable-attack": "ms-ability-unblockable",
+};
+
 type GameProps = {
   game: GameState;
   config: GameConfig;
@@ -114,6 +118,7 @@ export function Game({
           </span>
         ) : (
           <span className={styles.turnInfo} aria-live="polite">
+            <i className="ms ms-tap" aria-hidden="true" />
             Turno {game.turn}
           </span>
         )}
@@ -127,6 +132,7 @@ export function Game({
         className={`${styles.playerSection} ${activeSide === "rival" ? styles.activeField : ""}`}
       >
         <span className={styles.playerLabel}>
+          <i className={`ms ms-cost ms-${game.cpuMana}`} aria-hidden="true" />
           Rival
           {activeSide === "rival" && (
             <span className={styles.turnTag}>En turno</span>
@@ -184,7 +190,15 @@ export function Game({
         {activeEvent && game.currentEvent ? (
           <>
             <span className={styles.eventLabel}>Evento</span>
-            <span className={styles.eventName}>{activeEvent.name}</span>
+            <span className={styles.eventName}>
+              {EVENT_GLYPHS[game.currentEvent.eventId] && (
+                <i
+                  className={`ms ${EVENT_GLYPHS[game.currentEvent.eventId]}`}
+                  aria-hidden="true"
+                />
+              )}
+              {activeEvent.name}
+            </span>
             <span className={styles.eventDesc}>{activeEvent.description}</span>
             {hasUnresolvedEvent && (
               <button
@@ -208,6 +222,10 @@ export function Game({
         className={`${styles.playerSection} ${activeSide === "player" ? styles.activeField : ""}`}
       >
         <span className={styles.playerLabel}>
+          <i
+            className={`ms ms-cost ms-${config.playerMana}`}
+            aria-hidden="true"
+          />
           Jugador
           {activeSide === "player" && (
             <span className={styles.turnTag}>En turno</span>

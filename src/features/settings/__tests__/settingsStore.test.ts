@@ -33,6 +33,7 @@ function createMockStorage(): StorageLike & { data: Map<string, string> } {
 
 const validConfig: GameConfig = {
   mode: "hard",
+  playerMana: "g",
   playerInitialLife: 20,
   cpuInitialLife: 20,
   turnsEnabled: true,
@@ -106,6 +107,19 @@ describe("parseGameConfig", () => {
   it("rechaza eventos habilitados que no sean array de strings", () => {
     const config = { ...validConfig, enabledEventIds: ["ok", 42] };
     expect(parseGameConfig(config)).toBeNull();
+  });
+
+  it("acepta playerMana válido y usa verde si falta o es inválido", () => {
+    expect(parseGameConfig(validConfig)?.playerMana).toBe("g");
+    expect(
+      parseGameConfig({ ...validConfig, playerMana: "r" })?.playerMana,
+    ).toBe("r");
+    expect(
+      parseGameConfig({ ...validConfig, playerMana: undefined })?.playerMana,
+    ).toBe("g");
+    expect(
+      parseGameConfig({ ...validConfig, playerMana: "gold" })?.playerMana,
+    ).toBe("g");
   });
 });
 

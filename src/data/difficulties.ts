@@ -5,6 +5,7 @@ export const TURNS_PER_ROUND = 2;
 export const DIFFICULTY_PRESETS: Record<string, GameConfig> = {
   easy: {
     mode: "easy",
+    playerMana: "g",
     playerInitialLife: 20,
     cpuInitialLife: 20,
     turnsEnabled: true,
@@ -18,6 +19,7 @@ export const DIFFICULTY_PRESETS: Record<string, GameConfig> = {
   },
   medium: {
     mode: "medium",
+    playerMana: "g",
     playerInitialLife: 20,
     cpuInitialLife: 20,
     turnsEnabled: true,
@@ -37,6 +39,7 @@ export const DIFFICULTY_PRESETS: Record<string, GameConfig> = {
   },
   hard: {
     mode: "hard",
+    playerMana: "g",
     playerInitialLife: 20,
     cpuInitialLife: 20,
     turnsEnabled: true,

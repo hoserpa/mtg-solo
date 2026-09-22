@@ -1,11 +1,8 @@
-import type { ReactNode } from "react";
-import type { GameConfig } from "@/features/game/gameTypes";
+import type { GameConfig, ManaColor } from "@/features/game/gameTypes";
 import type { EventFrequency } from "@/features/events/eventTypes";
 import { getDefaultConfig, DIFFICULTY_PRESETS } from "@/data/difficulties";
+import { MANA_COLORS, MANA_LABELS } from "@/data/manaColors";
 import { INITIAL_EVENTS } from "@/data/events";
-import SunriseIcon from "~icons/game-icons/sunrise";
-import GrowthIcon from "~icons/game-icons/growth";
-import DeathSkullIcon from "~icons/game-icons/death-skull";
 import styles from "./Setup.module.css";
 
 const DIFFICULTY_INFO: Record<string, { name: string; desc: string }> = {
@@ -23,10 +20,10 @@ const DIFFICULTY_INFO: Record<string, { name: string; desc: string }> = {
   },
 };
 
-const DIFFICULTY_ICON: Record<string, { icon: ReactNode; tone: string }> = {
-  easy: { icon: <SunriseIcon />, tone: "white" },
-  medium: { icon: <GrowthIcon />, tone: "green" },
-  hard: { icon: <DeathSkullIcon />, tone: "black" },
+const DIFFICULTY_ICON: Record<string, { symbol: string; tone: string }> = {
+  easy: { symbol: "ms-w", tone: "white" },
+  medium: { symbol: "ms-g", tone: "green" },
+  hard: { symbol: "ms-b", tone: "black" },
 };
 
 const DEFAULT_EVENT_IDS = INITIAL_EVENTS.map((e) => e.id);
@@ -170,7 +167,7 @@ export function Setup({ config, onConfigChange, onStart, onBack }: SetupProps) {
                 }`}
                 aria-hidden="true"
               >
-                {DIFFICULTY_ICON[key].icon}
+                <i className={`ms ${DIFFICULTY_ICON[key].symbol}`} />
               </span>
               <span className={styles.difficultyBody}>
                 <span className={styles.difficultyName}>{info.name}</span>
@@ -257,6 +254,37 @@ export function Setup({ config, onConfigChange, onStart, onBack }: SetupProps) {
               />
             </div>
           )}
+          <div className={styles.configRow}>
+            <label className={styles.configLabel} htmlFor="playerMana">
+              Maná del jugador
+            </label>
+            <div className={styles.manaPicker}>
+              <i
+                className={`ms ms-cost ms-${config.playerMana}`}
+                aria-hidden="true"
+              />
+              <select
+                id="playerMana"
+                className={styles.configSelect}
+                value={config.playerMana}
+                onChange={(e) =>
+                  onConfigChange({
+                    ...config,
+                    playerMana: e.target.value as ManaColor,
+                  })
+                }
+              >
+                {MANA_COLORS.map((color) => (
+                  <option key={color} value={color}>
+                    {MANA_LABELS[color]}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </div>
+          <p className={styles.hint}>
+            El rival usará un maná aleatorio en cada partida.
+          </p>
         </div>
       </details>
 

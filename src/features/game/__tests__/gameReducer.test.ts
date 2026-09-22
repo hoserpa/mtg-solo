@@ -18,6 +18,7 @@ import { SeededRandom } from "@/lib/random";
 
 const defaultConfig: GameConfig = {
   mode: "hard",
+  playerMana: "g",
   playerInitialLife: 20,
   cpuInitialLife: 20,
   turnsEnabled: true,
@@ -49,6 +50,12 @@ describe("createGameState", () => {
     const state = createGameState(config);
     expect(state.playerLife).toBe(30);
     expect(state.cpuLife).toBe(15);
+  });
+
+  it("crea el estado con el maná del rival indicado", () => {
+    expect(createGameState(defaultConfig).cpuMana).toBe("r");
+    expect(createGameState(defaultConfig, "u").cpuMana).toBe("u");
+    expect(createGameState(defaultConfig, "b").cpuMana).toBe("b");
   });
 });
 

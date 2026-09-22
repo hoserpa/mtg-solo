@@ -2,8 +2,11 @@ import type { EventFrequency } from "@/features/events/eventTypes";
 
 export type Difficulty = "easy" | "medium" | "hard" | "custom";
 
+export type ManaColor = "w" | "u" | "b" | "r" | "g";
+
 export type GameConfig = {
   mode: Difficulty;
+  playerMana: ManaColor;
   playerInitialLife: number;
   cpuInitialLife: number;
   turnsEnabled: boolean;
@@ -20,6 +23,7 @@ export type GameStatus = "setup" | "playing" | "won" | "lost" | "draw";
 
 export type GameState = {
   status: GameStatus;
+  cpuMana: ManaColor;
   playerLife: number;
   cpuLife: number;
   turn: number;
