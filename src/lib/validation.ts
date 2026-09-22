@@ -1,5 +1,4 @@
 import type { GameConfig } from "@/features/game/gameTypes";
-import type { EventDefinition } from "@/features/events/eventTypes";
 
 export type ValidationResult = {
   valid: boolean;
@@ -40,22 +39,6 @@ export function validateGameConfig(config: GameConfig): ValidationResult {
         errors.push("La probabilidad de eventos debe estar entre 0 y 1.");
       }
     }
-  }
-
-  return { valid: errors.length === 0, errors };
-}
-
-export function validateEvent(event: EventDefinition): ValidationResult {
-  const errors: string[] = [];
-
-  if (!event.id || event.id.trim() === "") {
-    errors.push("El evento debe tener un id.");
-  }
-  if (!event.name || event.name.trim() === "") {
-    errors.push("El evento debe tener un nombre.");
-  }
-  if (event.weight < 0) {
-    errors.push("El peso del evento no puede ser negativo.");
   }
 
   return { valid: errors.length === 0, errors };

@@ -7,7 +7,6 @@ import {
   selectEventForRound,
   canTriggerConsecutiveEvent,
 } from "@/features/events/eventEngine";
-import { filterEventsForConfig } from "@/features/events/eventSelector";
 import { INITIAL_EVENTS } from "@/data/events";
 import { validateGameConfig } from "@/lib/validation";
 import { createRandomGenerator, type RandomGenerator } from "@/lib/random";
@@ -78,9 +77,8 @@ export function useGame() {
       const newGame = gameReducer(prev.game, action, prev.config);
 
       if (action.type === "NEXT_TURN" && prev.config.eventsEnabled) {
-        const enabledEvents = filterEventsForConfig(
-          INITIAL_EVENTS,
-          prev.config.enabledEventIds,
+        const enabledEvents = INITIAL_EVENTS.filter((e) =>
+          prev.config.enabledEventIds.includes(e.id),
         );
 
         const canTrigger = canTriggerConsecutiveEvent(
@@ -147,9 +145,8 @@ export function useGame() {
   }, [dispatch]);
 
   const resetGame = useCallback(() => {
-    dispatch({ type: "RESET_GAME" });
     setState((prev) => ({ ...prev, screen: "home", game: null }));
-  }, [dispatch]);
+  }, []);
 
   const recordedGameIdRef = useRef<string | null>(null);
 

@@ -21,11 +21,7 @@ export function getBrowserStorage(): StorageLike {
       const testKey = "__mtg_test__";
       window.localStorage.setItem(testKey, "1");
       window.localStorage.removeItem(testKey);
-      return {
-        getItem: (key) => window.localStorage.getItem(key),
-        setItem: (key, value) => window.localStorage.setItem(key, value),
-        removeItem: (key) => window.localStorage.removeItem(key),
-      };
+      return window.localStorage;
     } catch {
       // localStorage no disponible (modo privado, bloqueado) → memoria.
     }

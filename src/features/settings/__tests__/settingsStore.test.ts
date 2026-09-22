@@ -65,7 +65,6 @@ describe("createDefaultSettings", () => {
     const settings = createDefaultSettings(validConfig);
     expect(settings.config).toBe(validConfig);
     expect(settings.stats).toEqual(createDefaultStats());
-    expect(settings.preferences.reducedMotion).toBe(false);
   });
 });
 

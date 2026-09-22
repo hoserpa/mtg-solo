@@ -49,13 +49,6 @@ export async function resolveFirstEvent(
   expect(resolved, "debería aparecer un evento tras varios turnos").toBe(true);
 }
 
-export async function resolveFlow(page: Page): Promise<void> {
-  const resolve = page.getByRole("button", { name: /Resolver evento/ });
-  await expect(resolve).toBeVisible();
-  await resolve.click();
-  await expect(resolve).toBeHidden();
-}
-
 export const cpuLifeLabel = (page: Page) => page.getByLabel("Vida del rival");
 export const playerLifeLabel = (page: Page) =>
   page.getByLabel("Vida del jugador");

@@ -70,14 +70,11 @@ export function gameReducer(
   action: GameAction,
   config: GameConfig,
 ): GameState {
-  if (isGameOver(state) && action.type !== "RESET_GAME") {
+  if (isGameOver(state)) {
     return state;
   }
 
   switch (action.type) {
-    case "START_GAME":
-      return action.state;
-
     case "NEXT_TURN": {
       const turnsPerRound = config.turnsPerRound;
       const newTurn = state.turn + turnsPerRound;
@@ -114,9 +111,6 @@ export function gameReducer(
         currentEvent: { ...state.currentEvent, resolved: true },
       };
     }
-
-    case "RESET_GAME":
-      return createGameState(config);
 
     default:
       return state;

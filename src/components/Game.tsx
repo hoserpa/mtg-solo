@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import type { GameState, GameConfig } from "@/features/game/gameTypes";
-import { getEventById } from "@/features/events/eventRegistry";
+import { getEventById } from "@/data/events";
 import { resolveScaledEvent } from "@/features/events/eventEngine";
 import XIcon from "~icons/lucide/x";
 import HistoryIcon from "~icons/lucide/history";

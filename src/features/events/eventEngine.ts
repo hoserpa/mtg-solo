@@ -20,7 +20,10 @@ export function shouldTriggerEvent(
       return state.turn % frequency.turns === 0;
 
     case "chance":
-      return rng.next() < frequency.probability;
+      return (
+        rng.next() <
+        calculateRoundScaledProbability(frequency.probability, state.round)
+      );
   }
 }
 
@@ -68,31 +71,9 @@ export function selectEventForRound(
   frequency: EventFrequency,
   rng: RandomGenerator,
 ): EventDefinition | null {
-  const shouldTrigger = shouldTriggerEventWithScaling(state, frequency, rng);
-
-  if (!shouldTrigger) return null;
+  if (!shouldTriggerEvent(state, frequency, rng)) return null;
 
   return selectWeightedEvent(events, rng);
-}
-
-function shouldTriggerEventWithScaling(
-  state: GameState,
-  frequency: EventFrequency,
-  rng: RandomGenerator,
-): boolean {
-  if (state.currentEvent && !state.currentEvent.resolved) {
-    return false;
-  }
-
-  if (frequency.type === "chance") {
-    const scaledProbability = calculateRoundScaledProbability(
-      frequency.probability,
-      state.round,
-    );
-    return rng.next() < scaledProbability;
-  }
-
-  return shouldTriggerEvent(state, frequency, rng);
 }
 
 export function canTriggerConsecutiveEvent(

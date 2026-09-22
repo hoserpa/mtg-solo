@@ -6,7 +6,7 @@ import {
   calculateRoundScaledDamage,
   resolveScaledEvent,
 } from "../eventEngine";
-import { getEventById } from "../eventRegistry";
+import { getEventById } from "@/data/events";
 import type { GameState } from "@/features/game/gameTypes";
 import { SeededRandom } from "@/lib/random";
 import { createGameState } from "@/features/game/gameReducer";

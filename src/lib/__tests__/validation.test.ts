@@ -1,7 +1,6 @@
 import { describe, it, expect } from "vitest";
-import { validateGameConfig, validateEvent } from "../validation";
+import { validateGameConfig } from "../validation";
 import type { GameConfig } from "@/features/game/gameTypes";
-import type { EventDefinition } from "@/features/events/eventTypes";
 
 const validConfig: GameConfig = {
   mode: "hard",
@@ -67,41 +66,5 @@ describe("validateGameConfig", () => {
     };
     const result = validateGameConfig(config);
     expect(result.valid).toBe(true);
-  });
-});
-
-describe("validateEvent", () => {
-  const validEvent: EventDefinition = {
-    id: "test-event",
-    name: "Test",
-    description: "Evento de prueba.",
-    category: "damage",
-    weight: 10,
-    enabled: true,
-    effect: { type: "damagePlayer", amount: 3 },
-    resolutionMode: "automatic",
-  };
-
-  it("acepta un evento válido", () => {
-    const result = validateEvent(validEvent);
-    expect(result.valid).toBe(true);
-  });
-
-  it("rechaza evento sin id", () => {
-    const event = { ...validEvent, id: "" };
-    const result = validateEvent(event);
-    expect(result.valid).toBe(false);
-  });
-
-  it("rechaza evento sin nombre", () => {
-    const event = { ...validEvent, name: "" };
-    const result = validateEvent(event);
-    expect(result.valid).toBe(false);
-  });
-
-  it("rechaza peso negativo", () => {
-    const event = { ...validEvent, weight: -5 };
-    const result = validateEvent(event);
-    expect(result.valid).toBe(false);
   });
 });

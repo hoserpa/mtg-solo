@@ -20,10 +20,3 @@ export function selectWeightedEvent(
 
   return enabled[enabled.length - 1];
 }
-
-export function filterEventsForConfig(
-  events: EventDefinition[],
-  enabledIds: string[],
-): EventDefinition[] {
-  return events.filter((e) => enabledIds.includes(e.id));
-}

@@ -12,7 +12,6 @@ import {
   selectEventForRound,
   canTriggerConsecutiveEvent,
 } from "@/features/events/eventEngine";
-import { filterEventsForConfig } from "@/features/events/eventSelector";
 import { INITIAL_EVENTS } from "@/data/events";
 import { DIFFICULTY_PRESETS } from "@/data/difficulties";
 import { SeededRandom } from "@/lib/random";
@@ -300,19 +299,6 @@ describe("gameReducer", () => {
     });
   });
 
-  describe("RESET_GAME", () => {
-    it("reinicia al estado inicial", () => {
-      const state = createGameState(defaultConfig);
-      state.playerLife = 5;
-      state.turn = 10;
-      const result = gameReducer(state, { type: "RESET_GAME" }, defaultConfig);
-      expect(result.playerLife).toBe(20);
-      expect(result.cpuLife).toBe(20);
-      expect(result.turn).toBe(1);
-      expect(result.status).toBe("playing");
-    });
-  });
-
   describe("partida terminada", () => {
     it("no permite acciones en partida terminada", () => {
       const state: GameState = {
@@ -322,24 +308,14 @@ describe("gameReducer", () => {
       const result = gameReducer(state, { type: "NEXT_TURN" }, defaultConfig);
       expect(result.turn).toBe(1);
     });
-
-    it("permite RESET_GAME en partida terminada", () => {
-      const state: GameState = {
-        ...createGameState(defaultConfig),
-        status: "won",
-      };
-      const result = gameReducer(state, { type: "RESET_GAME" }, defaultConfig);
-      expect(result.status).toBe("playing");
-    });
   });
 });
 
 describe("regresión: los eventos no se agotan tras el primer evento (bug 1/2)", () => {
   function simulateMediumGame(seed: string, maxRounds: number): number {
     const config = DIFFICULTY_PRESETS.medium;
-    const enabledEvents = filterEventsForConfig(
-      INITIAL_EVENTS,
-      config.enabledEventIds,
+    const enabledEvents = INITIAL_EVENTS.filter((e) =>
+      config.enabledEventIds.includes(e.id),
     );
     const rng = new SeededRandom(seed);
     let state = createGameState(config);
@@ -386,9 +362,8 @@ describe("regresión: los eventos no se agotan tras el primer evento (bug 1/2)",
 
   it("una partida completa en Difícil genera varios eventos, no solo dos", () => {
     const config = DIFFICULTY_PRESETS.hard;
-    const enabledEvents = filterEventsForConfig(
-      INITIAL_EVENTS,
-      config.enabledEventIds,
+    const enabledEvents = INITIAL_EVENTS.filter((e) =>
+      config.enabledEventIds.includes(e.id),
     );
     let total = 0;
     for (let s = 0; s < 20; s++) {

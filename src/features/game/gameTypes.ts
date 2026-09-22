@@ -49,19 +49,8 @@ export type EventHistoryEntry = {
   timestamp: string;
 };
 
-export type Stats = {
-  gamesPlayed: number;
-  wins: number;
-  losses: number;
-  draws: number;
-  totalTurns: number;
-  totalEvents: number;
-};
-
 export type GameAction =
-  | { type: "START_GAME"; config: GameConfig; state: GameState }
   | { type: "NEXT_TURN" }
   | { type: "PLAYER_LIFE_CHANGE"; amount: number }
   | { type: "CPU_LIFE_CHANGE"; amount: number }
-  | { type: "RESOLVE_EVENT" }
-  | { type: "RESET_GAME" };
+  | { type: "RESOLVE_EVENT" };

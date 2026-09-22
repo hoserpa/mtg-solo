@@ -31,7 +31,7 @@ export const DIFFICULTY_PRESETS: Record<string, GameConfig> = {
       "damage-2",
       "lose-life-2",
       "discard-1",
-      "cannot-block",
+      "unblockable-attack",
       "nothing",
     ],
   },
@@ -60,7 +60,7 @@ export const DIFFICULTY_PRESETS: Record<string, GameConfig> = {
       "destroy-permanent-1",
       "sacrifice-1",
       "destroy-strongest-creature",
-      "cannot-block",
+      "unblockable-attack",
     ],
   },
 };
@@ -72,5 +72,3 @@ export function getDefaultConfig(mode: string): GameConfig {
   }
   return { ...preset };
 }
-
-export const DEFAULT_MAX_ROUNDS = 10;

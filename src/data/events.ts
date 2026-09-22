@@ -1,5 +1,9 @@
 import type { EventDefinition } from "@/features/events/eventTypes";
 
+export function getEventById(id: string): EventDefinition | undefined {
+  return INITIAL_EVENTS.find((e) => e.id === id);
+}
+
 export const INITIAL_EVENTS: EventDefinition[] = [
   {
     id: "damage-3",
@@ -136,13 +140,14 @@ export const INITIAL_EVENTS: EventDefinition[] = [
     resolutionMode: "manual",
   },
   {
-    id: "cannot-block",
-    name: "No puedes bloquear",
-    description: "El rival te impide bloquear este turno.",
+    id: "unblockable-attack",
+    name: "Ataque imbloqueable",
+    description:
+      "El rival ataca con una criatura que no puedes bloquear. Recibes 4 de daño.",
     category: "combat",
     weight: 14,
     enabled: true,
-    effect: { type: "restriction", restriction: "cannotBlock", duration: 1 },
-    resolutionMode: "manual",
+    effect: { type: "damagePlayer", amount: 4 },
+    resolutionMode: "automatic",
   },
 ];

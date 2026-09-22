@@ -2,7 +2,6 @@ import type { Difficulty, GameConfig } from "@/features/game/gameTypes";
 import type { EventFrequency } from "@/features/events/eventTypes";
 import type {
   PersistedData,
-  Preferences,
   Statistics,
   StoredSettings,
 } from "./settingsTypes";
@@ -30,17 +29,9 @@ export function createDefaultStats(): Statistics {
   };
 }
 
-export function createDefaultPreferences(): Preferences {
-  return { reducedMotion: false };
-}
-
-export function createDefaultSettings(
-  config: GameConfig,
-  preferences: Preferences = createDefaultPreferences(),
-): StoredSettings {
+export function createDefaultSettings(config: GameConfig): StoredSettings {
   return {
     config,
-    preferences,
     stats: createDefaultStats(),
   };
 }
@@ -155,23 +146,15 @@ export function parseStatistics(value: unknown): Statistics | null {
   };
 }
 
-export function parsePreferences(value: unknown): Preferences | null {
-  if (!isRecord(value)) return null;
-  if (typeof value.reducedMotion !== "boolean") return null;
-  return { reducedMotion: value.reducedMotion };
-}
-
 function parseStoredSettings(value: unknown): StoredSettings | null {
   if (!isRecord(value)) return null;
 
   const config = parseGameConfig(value.config);
   if (!config) return null;
 
-  const preferences =
-    parsePreferences(value.preferences) ?? createDefaultPreferences();
   const stats = parseStatistics(value.stats) ?? createDefaultStats();
 
-  return { config, preferences, stats };
+  return { config, stats };
 }
 
 export function parsePersistedData(raw: unknown): PersistedData | null {

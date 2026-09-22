@@ -9,13 +9,8 @@ export type Statistics = {
   totalEvents: number;
 };
 
-export type Preferences = {
-  reducedMotion: boolean;
-};
-
 export type StoredSettings = {
   config: GameConfig;
-  preferences: Preferences;
   stats: Statistics;
 };
 

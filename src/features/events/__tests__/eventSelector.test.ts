@@ -1,5 +1,5 @@
 import { describe, it, expect } from "vitest";
-import { selectWeightedEvent, filterEventsForConfig } from "../eventSelector";
+import { selectWeightedEvent } from "../eventSelector";
 import type { EventDefinition } from "../eventTypes";
 import { SeededRandom } from "@/lib/random";
 
@@ -125,18 +125,5 @@ describe("selectWeightedEvent", () => {
     ];
     const result = selectWeightedEvent(zeroWeight, rng);
     expect(result).toBeNull();
-  });
-});
-
-describe("filterEventsForConfig", () => {
-  it("filtra eventos por IDs habilitados", () => {
-    const result = filterEventsForConfig(testEvents, ["damage-3"]);
-    expect(result).toHaveLength(1);
-    expect(result[0].id).toBe("damage-3");
-  });
-
-  it("devuelve vacío si no hay coincidencias", () => {
-    const result = filterEventsForConfig(testEvents, ["nonexistent"]);
-    expect(result).toHaveLength(0);
   });
 });
