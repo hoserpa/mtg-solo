@@ -45,8 +45,8 @@ Evitar paletas planas de "app SaaS" (grises fríos, azules corporativos genéric
 
 ## 3. Tipografía
 
-- **Títulos y cabeceras** (nombre de pantalla, "Turno", "Ronda", nombre de evento): tipografía con carácter, tipo serif ornamental o "display", que recuerde a la tipografía de título de una carta clásica (ej. familias tipo _Beleren_, o alternativas web-safe con espíritu similar: serif con trazos marcados).
-- **Cuerpo de texto** (reglas, descripciones de evento, botones): tipografía legible y sobria, sans-serif o serif simple, priorizando legibilidad en móvil sobre fidelidad estética.
+- **Títulos y cabeceras** (nombre de pantalla, "Turno", "Ronda", nombre de evento): tipografía con carácter, tipo serif ornamental o "display", que recuerde a la tipografía de título de una carta clásica. Se usa **Beleren Bold** (`@font-face` vendido en `src/styles/fonts/`), de la familia real usada en las cartas de MTG.
+- **Cuerpo de texto** (reglas, descripciones de evento, botones): se utiliza la misma **Beleren Bold** para mantener la identidad de carta en toda la interfaz; al ser una fuente bold por diseño, se reservan tamaños generosos para preservar la legibilidad en móvil.
 - No sacrificar legibilidad por estética: los números de vida y turno deben leerse instantáneamente, incluso con poca luz o pantalla pequeña.
 
 ---

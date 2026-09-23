@@ -8,6 +8,15 @@
    o simplemente consumir las variables --mtg-* en tu propio CSS.
    ========================================================================== */
 
+/* Beleren Bold — tipografia de titulo de las cartas clasicas de MTG. */
+@font-face {
+  font-family: "Beleren Bold";
+  src: url("./fonts/Beleren2016-Bold.woff") format("woff");
+  font-weight: 400 700;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
   /* -- Paleta base: el fieltro del tapete -- */
   --mtg-felt-900: #10241c; /* sombra profunda / fondo de la mesa */
@@ -37,8 +46,8 @@
   --mtg-gold-mana: var(--mtg-gold-500); /* multicolor / destacado */
 
   /* -- Tipografía -- */
-  --mtg-font-display: "Cinzel", "Trajan Pro", Georgia, serif;
-  --mtg-font-body: "Spectral", "Iowan Old Style", Georgia, serif;
+  --mtg-font-display: "Beleren Bold", "Trajan Pro", Georgia, serif;
+  --mtg-font-body: "Beleren Bold", "Iowan Old Style", Georgia, serif;
   --mtg-font-mono: "JetBrains Mono", "Fira Code", ui-monospace, monospace;
 
   /* -- Espaciado y forma -- */
