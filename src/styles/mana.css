@@ -52,6 +52,17 @@
 .ms-ability-defender::before {
   content: "\e94c";
 }
+.ms-ability-duels-battle-cry::before {
+  content: "\ea5b";
+}
+
+.ms-ability-duels-cohort::before {
+  content: "\ea5f";
+}
+
+.ms-ability-duels-delirium::before {
+  content: "\ea63";
+}
 
 .ms-ability-duels-exile::before {
   content: "\ea69";
@@ -65,6 +76,10 @@
   content: "\ea4b";
 }
 
+.ms-ability-morph::before {
+  content: "\ea3e";
+}
+
 .ms-ability-surveil::before {
   content: "\ea38";
 }
@@ -73,16 +88,20 @@
   content: "\ea5c";
 }
 
+.ms-exile::before {
+  content: "\e9cd";
+}
+
+.ms-counter-damage::before {
+  content: "\e9dd";
+}
+
 .ms-counter-doom::before {
   content: "\e92f";
 }
 
 .ms-counter-skull::before {
   content: "\e940";
-}
-
-.ms-loyalty-up::before {
-  content: "\e627";
 }
 
 .ms-loyalty-down::before {

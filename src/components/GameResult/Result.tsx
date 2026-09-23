@@ -8,9 +8,17 @@ type ResultProps = {
 };
 
 const RESULT_CONFIG = {
-  won: { icon: "ms-loyalty-up", title: "Victoria", className: styles.won },
-  lost: { icon: "ms-loyalty-down", title: "Derrota", className: styles.lost },
-  draw: { icon: "ms-tap", title: "Empate", className: styles.draw },
+  won: {
+    icon: "ms-ability-duels-battle-cry",
+    title: "Victoria",
+    className: styles.won,
+  },
+  lost: { icon: "ms-b", title: "Derrota", className: styles.lost },
+  draw: {
+    icon: "ms-ability-duels-cohort",
+    title: "Empate",
+    className: styles.draw,
+  },
 } as const;
 
 export function Result({ game, onPlayAgain, onChangeConfig }: ResultProps) {

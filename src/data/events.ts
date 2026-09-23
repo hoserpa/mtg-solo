@@ -1,9 +1,7 @@
 import type { EventDefinition } from "@/features/events/eventTypes";
-
 export function getEventById(id: string): EventDefinition | undefined {
   return INITIAL_EVENTS.find((e) => e.id === id);
 }
-
 export const INITIAL_EVENTS: EventDefinition[] = [
   {
     id: "damage-3",
@@ -12,7 +10,7 @@ export const INITIAL_EVENTS: EventDefinition[] = [
     category: "damage",
     weight: 40,
     enabled: true,
-    icon: "ms-ability-duels-must-attack",
+    icon: "ms-counter-damage",
     effect: { type: "damagePlayer", amount: 3 },
     resolutionMode: "automatic",
   },
@@ -21,9 +19,9 @@ export const INITIAL_EVENTS: EventDefinition[] = [
     name: "Ataque",
     description: "El rival ataca. Recibes 2 de daño.",
     category: "damage",
-    weight: 35,
+    weight: 30,
     enabled: true,
-    icon: "ms-ability-duels-must-attack",
+    icon: "ms-counter-damage",
     effect: { type: "damagePlayer", amount: 2 },
     resolutionMode: "automatic",
   },
@@ -34,7 +32,7 @@ export const INITIAL_EVENTS: EventDefinition[] = [
     category: "damage",
     weight: 30,
     enabled: true,
-    icon: "ms-loyalty-down",
+    icon: "ms-ability-morph",
     effect: { type: "damagePlayer", amount: 2 },
     resolutionMode: "automatic",
   },
@@ -78,7 +76,7 @@ export const INITIAL_EVENTS: EventDefinition[] = [
     category: "destroy",
     weight: 15,
     enabled: true,
-    icon: "ms-ability-duels-exile",
+    icon: "ms-ability-duels-delirium",
     effect: { type: "destroyCards", amount: 1 },
     resolutionMode: "manual",
   },
@@ -89,7 +87,7 @@ export const INITIAL_EVENTS: EventDefinition[] = [
     category: "destroy",
     weight: 15,
     enabled: true,
-    icon: "ms-ability-duels-exile",
+    icon: "ms-ability-duels-delirium",
     effect: { type: "destroyCards", amount: 1 },
     resolutionMode: "manual",
   },
@@ -100,7 +98,7 @@ export const INITIAL_EVENTS: EventDefinition[] = [
     category: "destroy",
     weight: 15,
     enabled: true,
-    icon: "ms-ability-duels-exile",
+    icon: "ms-ability-duels-delirium",
     effect: { type: "destroyCards", amount: 1 },
     resolutionMode: "manual",
   },
