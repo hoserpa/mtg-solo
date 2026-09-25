@@ -108,6 +108,10 @@
   content: "\e625";
 }
 
+.ms-watermark-mtg::before {
+  content: "\e9ed";
+}
+
 .ms-cost {
   background-color: #beb9b2;
   border-radius: 1em;

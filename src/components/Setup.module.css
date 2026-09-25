@@ -174,7 +174,6 @@
   transition:
     box-shadow 0.15s ease,
     transform 0.15s ease;
-  margin-top: auto;
   margin-bottom: var(--mtg-space-4);
 }
 

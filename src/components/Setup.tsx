@@ -4,6 +4,7 @@ import { getDefaultConfig, DIFFICULTY_PRESETS } from "@/data/difficulties";
 import { MANA_COLORS, MANA_LABELS } from "@/data/manaColors";
 import { INITIAL_EVENTS } from "@/data/events";
 import styles from "./Setup.module.css";
+import { Footer } from "./Footer";
 
 const DIFFICULTY_INFO: Record<string, { name: string; desc: string }> = {
   easy: {
@@ -317,6 +318,7 @@ export function Setup({ config, onConfigChange, onStart, onBack }: SetupProps) {
       <button className={styles.startButton} onClick={onStart} type="button">
         Comenzar
       </button>
+      <Footer />
     </div>
   );
 }

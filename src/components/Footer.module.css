@@ -1,0 +1,48 @@
+.footer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: center;
+  gap: var(--mtg-space-4);
+  margin-top: auto;
+  width: 100%;
+  max-width: 720px;
+  padding: var(--mtg-space-2) var(--mtg-space-4);
+  text-align: left;
+  color: var(--mtg-parchment-200);
+  opacity: 0.85;
+}
+
+.watermark {
+  color: var(--mtg-gold-400);
+  opacity: 0.5;
+  flex-shrink: 0;
+}
+
+.footer :global(.ms) {
+  font-size: 7rem;
+  line-height: 1;
+}
+
+.text {
+  display: flex;
+  flex-direction: column;
+  gap: var(--mtg-space-1);
+  flex: 1;
+  min-width: 0;
+}
+
+.disclaimer {
+  font-size: 0.62rem;
+  line-height: 1.5;
+  margin: 0;
+}
+
+.copyright {
+  font-family: var(--mtg-font-mono);
+  font-size: 0.6rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--mtg-gold-500);
+  margin: 0;
+}
